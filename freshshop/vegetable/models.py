@@ -1,4 +1,5 @@
 from django.db import models
+from django.utils import timezone
 
 # Create your models here.
 
@@ -16,3 +17,13 @@ class vegitable(models.Model):
     price = models.FloatField()
     offer = models.BooleanField(default=False)
     des = models.TextField(blank=True, null=True)
+
+
+# create a review
+
+class vegreview(models.Model):
+    product_id = models.ForeignKey(vegitable, on_delete= models.CASCADE)
+    costamor_nam = models.CharField(max_length=100, blank=True)
+    product_name = models.CharField(max_length=100,blank=True)
+    review_date = models.DateTimeField(default=timezone.now)
+    review = models.TextField(max_length=400)

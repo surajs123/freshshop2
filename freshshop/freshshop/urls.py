@@ -21,7 +21,13 @@ from vegetable.admin import vegitable_site
 from django.conf.urls.static import static
 
 urlpatterns = [
+    path('', include('home.urls')),
+    path('fruit/', include('fruit.urls')),
+    path('vegitable/', include('vegetable.urls')),
     path('admin/', admin.site.urls),
     path('fruitadmin/', fruit_site.urls),
     path('vegitableadmin/', vegitable_site.urls),
+    path('account/', include('custamor.urls')),
 ]+ static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)
+
+
