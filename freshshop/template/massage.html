@@ -1,0 +1,43 @@
+
+
+    <style>
+
+        .msg msg-error alert{
+            background-color: rgba(233, 77, 50, 0.555);
+            width: 60%;
+            display:flex; 
+            justify-content:center; 
+            margin:auto
+        }
+        .msg msg-warning alert{
+            background-color: rgba(230, 233, 50, 0.555);
+            width: 60%;
+            display:flex; 
+            justify-content:center; 
+            margin:auto
+        }
+        .msg msg-success alert{
+            background-color: green;
+            width: 60%;
+            display:flex; 
+            justify-content:center; 
+            margin:auto
+        }
+
+    </style>
+{% if messages %}
+    
+    
+    
+    {% for message in messages %}
+    
+    
+        <div class="msg msg-{{massage.tags}} alert" id="msg" role="alert">
+            {{message}}:123
+        </div>
+     
+    {% endfor %}   
+
+
+{% endif %} 
+   
