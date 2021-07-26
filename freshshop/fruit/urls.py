@@ -4,7 +4,7 @@ from custamor.views import cartfun
 urlpatterns = [
     path('', views.froot, name= 'froot'),
     path('detail/', views.fdetail, name='detail' ),
-    path('review/', views.derew, name='review'),
+    path('detail/review/', views.frview, name='review'),
     path('cart/', cartfun, name='cart'),
 
 ]

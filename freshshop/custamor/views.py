@@ -139,11 +139,22 @@ def cartfun(request):
 
 
 def delectcart(request):
-    cos = request.GET['cos']
-    deli = request.GET['deli']
-    CartModelFruite.objects.get(id=deli)
-    
-    return redirect('/account/carten/?cos_id='+cos)
+    typ = request.GET['type']
+    if typ == 'fruit':
+
+        cos_id = request.GET['cos']
+        deli = request.GET['deli']
+        CartModelFruite.objects.get(id=deli).delete()
+    if typ == 'vegita':
+
+        cos_id = request.GET['cos']
+        deli = request.GET['deli']
+        CartModelvegitable.objects.get(id=deli).delete()
+
+    else:
+        print("somthing wrong in delete cart... ")    
+            
+    return redirect('/account/carten/?cos_id='+cos_id)
 
 
 

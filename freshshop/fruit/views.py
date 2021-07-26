@@ -32,7 +32,7 @@ def fdetail(request):
         
         
 
-def derew(request):
+def frview(request):
     if request.method == 'POST':
         reviews = request.POST['review']
         pro_id =  request.POST['product']
