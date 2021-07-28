@@ -17,6 +17,9 @@ class fruits(models.Model):
     offer = models.BooleanField(default=False)
     des = models.TextField(blank=True, null=True)
 
+    def __str__(self):
+        return self.name
+
 
 # create a review
 

@@ -1,5 +1,7 @@
 
+from django.db.models.query_utils import Q
 from django.dispatch.dispatcher import receiver
+from django.http.response import JsonResponse
 from django.shortcuts import render, redirect
 from .models import fruits, frureview
 from django.contrib.auth import authenticate
@@ -11,15 +13,22 @@ count2 =0
 cata2 = ' FRUITS '
 for totf in qtyf:
     count2 =count2+totf.quanty
-
+typ = 'fruit'
 def froot(request):
-    typ = 'fruit'
-   
-    food = fruits.objects.all()
-    return render(request, 'shop.html',{'food':food, 'qty':count2, 'cata':cata2, 'act1':'active','typ':typ})
+
+    if request.method == 'POST':
+        value = request.POST['search']
+        obj = fruits.objects.filter(name=value)
+    
+
+        return render(request, 'shop.html',{'food':obj, 'qty':count2, 'cata':cata2, 'act1':'active','typ':typ})
+
+    else:
+        food = fruits.objects.all()
+        return render(request, 'shop.html',{'food':food, 'qty':count2, 'cata':cata2, 'act1':'active','typ':typ})
 
 def fdetail(request):
-    typ = 'fruit'
+    
     val = request.GET['product']
     obj = fruits.objects.get(id=val)
     rev = frureview.objects.filter(product_id=obj)
@@ -60,6 +69,32 @@ def frview(request):
             
                
         return redirect('/fruit/detail/?product='+ pro_id)
+        
+
+def autocom(request):
+    
+    if 'term' in request.GET:
+        nam = request.GET['term']
+        print(nam)
+        name1 = list()
+        food = fruits.objects.filter(Q(name__istartswith=nam))
+        for fruit in food:
+            name1.append(fruit.name)
+            print(name1)
+        return JsonResponse(name1, safe=False) 
+        
+        
+        
+          
+        
+        
+    food = fruits.objects.all()
+    return render(request, 'shop.html',{'food':food, 'qty':count2, 'cata':cata2, 'act1':'active','typ':typ})
+
+
+
+
+        
         
 
 

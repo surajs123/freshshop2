@@ -34,7 +34,7 @@
       <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
       <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
-
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <style>
         .icon_bag{
             width: 100%;
@@ -48,6 +48,33 @@
             background: black;
         }
 
+    </style>
+    <style>
+        #search{
+            width: 50px;
+            height: 100%;
+            
+            color: #ffffff;
+            background: #07070375;
+            display: flex;
+            align-items: center;
+            border-left: solid 2px rgb(49, 48, 48);
+            
+
+        }
+        #search:hover{
+            
+            background: rgb(59, 58, 58);
+            width: 53px;
+            
+            border-radius: 8%;
+        }
+
+    </style>
+    <style>
+        #icon{
+            align-items: center;
+        }
     </style>
 
 </head>
@@ -242,27 +269,28 @@
                 <div class="col-xl-9 col-lg-9 col-sm-12 col-xs-12 shop-content-right">
                     <div class="right-product-box">
                         <div class="product-item-filter row">
-                            <div class="col-12 col-sm-8 text-center text-sm-left">
+                            <div class="col-12 col-sm-8 text-center text-sm-left" style="display: flex; flex-flow:column; background:black; height:150%">
                             
-                                <div class="toolbar-sorter-right">
-                                    <span>Sort by </span>
-                                   
-                                    <select id="basic" class="selectpicker show-tick form-control" data-placeholder="$ USD">
-                                        <form action="">
-									<option data-display="Select">Nothing</option>
-									<option > <button value="1" name="sort" type="submit">Popularity</button></option>
-									<option value="2">High Price → High Price</option>
-									<option value="3">Low Price → High Price</option>
-									<option value="4">Best Selling</option>
-                                        </form>
-								    </select>
-                                   
-                                </div>
-                                <p>Showing all 4 results</p>
                                 
+                                    <form action="" name="work2" method="POST">
+                                        {% csrf_token %}
+                                        <div class="input-group">
+                                           
+                                            
+                                           
+                                            <input name= "search" type="text" class="form-control" placeholder="Search" id="tags" style="background: rgba(0, 0, 0, 0.555); border:none; color:#ffffff;">
+                                            
+                                            
+                                            <a onclick="document.work2.submit()"><div class="input-group-addon" id="search"><i class="fa fa-search" style="margin:auto;"></i></div></a>
+                                         </div>
+                                    
+                                    </form>
+                                    
+                                   
+                                                                
                             </div>
-                            <div class="col-12 col-sm-4 text-center text-sm-right">
-                                <ul class="nav nav-tabs ml-auto">
+                            <div class="col-12 col-sm-4 text-center text-sm-right" >
+                                <ul class="nav nav-tabs ml-auto"  >
                                    
                                    
                                     <li>
@@ -338,12 +366,7 @@
                 </div>
 				<div class="col-xl-3 col-lg-3 col-sm-12 col-xs-12 sidebar-shop-left">
                     <div class="product-categori">
-                        <div class="search-product">
-                            <form action="#">
-                                <input class="form-control" placeholder="Search here..." type="text">
-                                <button type="submit"> <i class="fa fa-search"></i> </button>
-                            </form>
-                        </div>
+                       
                         <div class="filter-sidebar-left">
                             <div class="title-left">
                                 <h3>Categories</h3>
@@ -586,6 +609,16 @@
     <script src="{% static 'js/form-validator.min.js' %]"></script>
     <script src="{% static 'js/contact-form-script.js' %}"></script>
     <script src="{% static 'js/custom.js' %}"></script>
+    <script>
+        $( function() {
+          
+          $( "#tags" ).autocomplete({
+            source: '{% url 'autocomplete' %}'
+          });
+        } );
+    </script>
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 </body>
 
 </html>

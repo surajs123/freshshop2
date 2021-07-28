@@ -1,21 +1,28 @@
+from django.db.models.query_utils import Q
+from django.http.response import JsonResponse
 from django.shortcuts import render, redirect
 from .models import vegitable, vegreview
 # Create your views here.
 qtyv = vegitable.objects.all()
 count1 =0
-
+typ = 'vegita'
 for totv in qtyv:
     count1 =count1+totv.quanty
 
 
 def vegi(request):
-    typ = 'vegita'
-   
-    food = vegitable.objects.all()
-    return render(request, 'shop.html',{'food':food, 'qty':count1, 'cata':' VEGITABLE ', 'act2':'active', 'typ':typ})
+    if request.method == 'POST':
+        value = request.POST['search']
+        obj = vegitable.objects.filter(name=value)
+
+        return render(request, 'shop.html',{'food':obj, 'qty':count1, 'cata':' VEGITABLE ', 'act2':'active', 'typ':typ})
+    
+    else:
+        food = vegitable.objects.all()
+        return render(request, 'shop.html',{'food':food, 'qty':count1, 'cata':' VEGITABLE ', 'act2':'active', 'typ':typ})
 
 def vdetail(request):
-    typ = 'fruit'
+    
     val = request.GET['product']
     obj = vegitable.objects.get(id=val)
     food2 = vegitable.objects.all()
@@ -50,4 +57,28 @@ def vegview(request):
             
             
                
-        return redirect('/vegitable/detail/?product='+ pro_id)        
+        return redirect('/vegitable/detail/?product='+ pro_id)   
+
+
+def autocom(request):
+    
+    if 'term' in request.GET:
+        nam = request.GET['term']
+        print(nam)
+        name1 = list()
+        food = vegitable.objects.filter(Q(name__istartswith=nam))
+        for vegita in food:
+            name1.append(vegita.name)
+            print(name1)
+        return JsonResponse(name1, safe=False) 
+        
+        
+        
+          
+        
+        
+    food = vegitable.objects.all()
+    return render(request, 'shop.html',{'food':food, 'qty':count1, 'cata':' VEGITABLE ', 'act2':'active', 'typ':typ})
+
+
+
