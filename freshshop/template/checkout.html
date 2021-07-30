@@ -298,9 +298,10 @@
                                 <label for="address2">Address 2 *</label>
                                 <input type="text" class="form-control" id="address2" placeholder=""> </div>
                             <div class="row">
+                                <form name="myform" id="myForm">
                                 <div class="col-md-5 mb-3">
                                     <label for="country">Country *</label>
-                                    <select class="wide w-100" id="country">
+                                    <select class="wide w-100" name="state" id="countySel" size="1">
 									<option value="Choose..." data-display="Select">Choose...</option>
 									<option value="United States">United States</option>
 								</select>
@@ -308,17 +309,28 @@
                                 </div>
                                 <div class="col-md-4 mb-3">
                                     <label for="state">State *</label>
-                                    <select class="wide w-100" id="state">
-									<option data-display="Select">Choose...</option>
-									<option>California</option>
+                                    <select class="wide w-100" name="countrya" id="stateSel" size="1">
+                                    <option value="" selected="selected">select Country </option>
+									
 								</select>
                                     <div class="invalid-feedback"> Please provide a valid state. </div>
                                 </div>
-                                <div class="col-md-3 mb-3">
-                                    <label for="zip">Zip *</label>
-                                    <input type="text" class="form-control" id="zip" placeholder="" required>
-                                    <div class="invalid-feedback"> Zip code required. </div>
+
+                                <div class="col-md-4 mb-3">
+                                    <label for="state">district *</label>
+                                    <select class="wide w-100" name="district" id="districtSel" size="1">
+                                    <option value="" selected="selected">select your district </option>
+									
+								</select>
+                                    <div class="invalid-feedback"> Please provide a valid state. </div>
                                 </div>
+                               
+                                <div class="col-md-3 mb-3">
+                                    <label for="zip">picode *</label>
+                                    <input type="number" class="form-control" id="zip" placeholder="" required>
+                                    <div class="invalid-feedback"> pincode code required. </div>
+                                </div>
+                            </form>
                             </div>
                             <hr class="mb-4">
                             <div class="custom-control custom-checkbox">
@@ -674,6 +686,60 @@
     <script src="{% static 'js/form-validator.min.js' %}"></script>
     <script src="{% static 'js/contact-form-script.js' %}"></script>
     <script src="{% static 'js/custom.js' %}"></script>
+    <script>
+        var stateObject = {
+        "India": { "Delhi": ["new Delhi", "North Delhi"],
+        "Kerala": ["Alappuzha",
+        "Ernakulam",
+        "Idukki",
+        "Kannur",
+        "Kasaragod",
+        "Kollam",
+        "Kottayam",
+        "Kozhikode",
+        "Malappuram",
+        "Palakkad",
+        "Pathanamthitta",
+        "Thiruvananthapuram",
+        "Thrissur",
+        "Wayanad",
+        ],
+        "Goa": ["North Goa", "South Goa"],
+        },
+        "Australia": {
+        "South Australia": ["Dunstan", "Mitchell"],
+        "Victoria": ["Altona", "Euroa"]
+        }, "Canada": {
+        "Alberta": ["Acadia", "Bighorn"],
+        "Columbia": ["Washington", ""]
+        },
+        }
+        window.onload = function () {
+        var countySel = document.getElementById("countySel"),
+        stateSel = document.getElementById("stateSel"),
+        districtSel = document.getElementById("districtSel");
+        for (var country in stateObject) {
+        countySel.options[countySel.options.length] = new Option(country, country);
+        }
+        countySel.onchange = function () {
+        stateSel.length = 1; // remove all options bar first
+        districtSel.length = 1; // remove all options bar first
+        if (this.selectedIndex < 1) return; // done
+        for (var state in stateObject[this.value]) {
+        stateSel.options[stateSel.options.length] = new Option(state, state);
+        }
+        }
+        countySel.onchange(); // reset in case page is reloaded
+        stateSel.onchange = function () {
+        districtSel.length = 1; // remove all options bar first
+        if (this.selectedIndex < 1) return; // done
+        var district = stateObject[countySel.value][this.value];
+        for (var i = 0; i < district.length; i++) {
+        districtSel.options[districtSel.options.length] = new Option(district[i], district[i]);
+        }
+        }
+        }
+    </script> 
 </body>
 
 </html>

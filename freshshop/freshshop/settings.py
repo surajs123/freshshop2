@@ -41,6 +41,8 @@ INSTALLED_APPS = [
     'custamor',
     'vegetable',
     'fruit',
+    'checkout',
+    
 ]
 
 MIDDLEWARE = [
