@@ -9,7 +9,7 @@ class vegitable(models.Model):
    
     name = models.CharField(max_length= 150)
     quanty = models.FloatField(blank=True, null=True)
-    date = models.DateField(null=True)
+    date = models.DateTimeField(default=timezone.now)
     img = models.ImageField(upload_to = 'froot', null=True, blank=True)
     img2 = models.ImageField(upload_to = 'froot',blank=True, null=True)
     img3 = models.ImageField(upload_to = 'froot', blank=True, null=True)
