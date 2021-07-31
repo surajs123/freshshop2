@@ -28,6 +28,7 @@ urlpatterns = [
     path('fruitadmin/', fruit_site.urls),
     path('vegitableadmin/', vegitable_site.urls),
     path('account/', include('custamor.urls')),
+    path('checkout/', include('checkout.urls')),
 ]+ static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)
 
 
