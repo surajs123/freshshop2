@@ -3,6 +3,8 @@ from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin,BaseUserManager,User
 from django.db.models.fields import BooleanField
 from django.utils import timezone
+from fruit.models import fruits
+from vegetable.models import vegitable
 
 # Create your models here.
 
@@ -47,3 +49,16 @@ class onlineuser(AbstractBaseUser,PermissionsMixin):
 
     def __str__(self):
         return self.user_name
+
+
+class CartModelFruite(models.Model):
+    costamor = models.ForeignKey(onlineuser, on_delete=models.CASCADE)
+    product = models.ForeignKey(fruits, on_delete=models.CASCADE)
+    qty = models.FloatField(default=1)
+    post_date = models.DateTimeField(default=timezone.now)
+
+class CartModelvegitable(models.Model):
+    costamor = models.ForeignKey(onlineuser, on_delete=models.CASCADE)
+    product = models.ForeignKey(vegitable, on_delete=models.CASCADE)
+    qty = models.FloatField(default=1)
+    post_date = models.DateTimeField(default=timezone.now)

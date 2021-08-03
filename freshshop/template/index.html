@@ -29,12 +29,15 @@
     <link rel="stylesheet" href="{% static 'css/responsive.css' %}">
     <!-- Custom CSS -->
     <link rel="stylesheet" href="{% static 'css/custom.css' %}">
+    
 
 
     <!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
       <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
+
+
 
 </head>
 
@@ -140,7 +143,7 @@
 								<li><a href="{% url 'froot' %}">Sidebar Shop</a></li>
 								
                                 
-                                <li><a href="{% url 'account' %}">Checkout</a></li>
+                                <li><a href="{% url 'checkout' %}">Checkout</a></li>
                                 <li><a href="my-account.html">My Account</a></li>
                                 <li><a href="wishlist.html">Wishlist</a></li>
                             </ul>
@@ -186,15 +189,26 @@
     <!-- End Main Top -->
 
     <!-- Start Top Search -->
+    
+        
     <div class="top-search">
-        <div class="container">
+        
+        <div class="container" style="display: flex; flex-flow:column">
             <div class="input-group">
+               
                 <span class="input-group-addon"><i class="fa fa-search"></i></span>
-                <input type="text" class="form-control" placeholder="Search">
-                <span class="input-group-addon close-search"><i class="fa fa-times"></i></span>
+               
+                <input type="text" class="form-control" placeholder="Search" id="tags" style="width: 60%;">
+                <input type="submit" value="Search" id="search" name="surch">
+                    
+                    
+                <span class="input-group-addon close-search" style="margin-left: 20px;"><i class="fa fa-times"></i></span>
+                
             </div>
         </div>
+    </form>
     </div>
+    
     <!-- End Top Search -->
 
     <!-- Start Slider -->
@@ -566,6 +580,10 @@
     <script src="{% static 'js/form-validator.min.js' %}"></script>
     <script src="{% static 'js/contact-form-script.js' %}"></script>
     <script src="{% static 'js/custom.js' %}"></script>
+   
+    
+    
+  
 </body>
 
 </html>

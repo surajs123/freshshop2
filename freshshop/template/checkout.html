@@ -125,7 +125,7 @@
                         <li class="dropdown active">
                             <a href="#" class="nav-link dropdown-toggle arrow" data-toggle="dropdown">SHOP</a>
                             <ul class="dropdown-menu">
-								<li><a href="shop.html">Sidebar Shop</a></li>
+							
 								<li><a href="shop-detail.html">Shop Detail</a></li>
                                 <li><a href="cart.html">Cart</a></li>
                                 <li><a href="checkout.html">Checkout</a></li>
@@ -216,48 +216,7 @@
     <!-- Start Cart  -->
     <div class="cart-box-main">
         <div class="container">
-            <div class="row new-account-login">
-                <div class="col-sm-6 col-lg-6 mb-3">
-                    <div class="title-left">
-                        <h3>Account Login</h3>
-                    </div>
-                    <h5><a data-toggle="collapse" href="#formLogin" role="button" aria-expanded="false">Click here to Login</a></h5>
-                    <form class="mt-3 collapse review-form-box" id="formLogin">
-                        <div class="form-row">
-                            <div class="form-group col-md-6">
-                                <label for="InputEmail" class="mb-0">Email Address</label>
-                                <input type="email" class="form-control" id="InputEmail" placeholder="Enter Email"> </div>
-                            <div class="form-group col-md-6">
-                                <label for="InputPassword" class="mb-0">Password</label>
-                                <input type="password" class="form-control" id="InputPassword" placeholder="Password"> </div>
-                        </div>
-                        <button type="submit" class="btn hvr-hover">Login</button>
-                    </form>
-                </div>
-                <div class="col-sm-6 col-lg-6 mb-3">
-                    <div class="title-left">
-                        <h3>Create New Account</h3>
-                    </div>
-                    <h5><a data-toggle="collapse" href="#formRegister" role="button" aria-expanded="false">Click here to Register</a></h5>
-                    <form class="mt-3 collapse review-form-box" id="formRegister">
-                        <div class="form-row">
-                            <div class="form-group col-md-6">
-                                <label for="InputName" class="mb-0">First Name</label>
-                                <input type="text" class="form-control" id="InputName" placeholder="First Name"> </div>
-                            <div class="form-group col-md-6">
-                                <label for="InputLastname" class="mb-0">Last Name</label>
-                                <input type="text" class="form-control" id="InputLastname" placeholder="Last Name"> </div>
-                            <div class="form-group col-md-6">
-                                <label for="InputEmail1" class="mb-0">Email Address</label>
-                                <input type="email" class="form-control" id="InputEmail1" placeholder="Enter Email"> </div>
-                            <div class="form-group col-md-6">
-                                <label for="InputPassword1" class="mb-0">Password</label>
-                                <input type="password" class="form-control" id="InputPassword1" placeholder="Password"> </div>
-                        </div>
-                        <button type="submit" class="btn hvr-hover">Register</button>
-                    </form>
-                </div>
-            </div>
+            
             <div class="row">
                 <div class="col-sm-6 col-lg-6 mb-3">
                     <div class="checkout-address">
@@ -298,9 +257,10 @@
                                 <label for="address2">Address 2 *</label>
                                 <input type="text" class="form-control" id="address2" placeholder=""> </div>
                             <div class="row">
+                                <form name="myform" id="myForm">
                                 <div class="col-md-5 mb-3">
                                     <label for="country">Country *</label>
-                                    <select class="wide w-100" id="country">
+                                    <select class="wide w-100" name="state" id="countySel" size="1">
 									<option value="Choose..." data-display="Select">Choose...</option>
 									<option value="United States">United States</option>
 								</select>
@@ -308,17 +268,28 @@
                                 </div>
                                 <div class="col-md-4 mb-3">
                                     <label for="state">State *</label>
-                                    <select class="wide w-100" id="state">
-									<option data-display="Select">Choose...</option>
-									<option>California</option>
+                                    <select class="wide w-100" name="countrya" id="stateSel" size="1">
+                                    <option value="" selected="selected">select Country </option>
+									
 								</select>
                                     <div class="invalid-feedback"> Please provide a valid state. </div>
                                 </div>
-                                <div class="col-md-3 mb-3">
-                                    <label for="zip">Zip *</label>
-                                    <input type="text" class="form-control" id="zip" placeholder="" required>
-                                    <div class="invalid-feedback"> Zip code required. </div>
+
+                                <div class="col-md-4 mb-3">
+                                    <label for="state">district *</label>
+                                    <select class="wide w-100" name="district" id="districtSel" size="1">
+                                    <option value="" selected="selected">select your district </option>
+									
+								</select>
+                                    <div class="invalid-feedback"> Please provide a valid state. </div>
                                 </div>
+                               
+                                <div class="col-md-3 mb-3">
+                                    <label for="zip">picode *</label>
+                                    <input type="number" class="form-control" id="zip" placeholder="" required>
+                                    <div class="invalid-feedback"> pincode code required. </div>
+                                </div>
+                            </form>
                             </div>
                             <hr class="mb-4">
                             <div class="custom-control custom-checkbox">
@@ -385,50 +356,8 @@
                 </div>
                 <div class="col-sm-6 col-lg-6 mb-3">
                     <div class="row">
-                        <div class="col-md-12 col-lg-12">
-                            <div class="shipping-method-box">
-                                <div class="title-left">
-                                    <h3>Shipping Method</h3>
-                                </div>
-                                <div class="mb-4">
-                                    <div class="custom-control custom-radio">
-                                        <input id="shippingOption1" name="shipping-option" class="custom-control-input" checked="checked" type="radio">
-                                        <label class="custom-control-label" for="shippingOption1">Standard Delivery</label> <span class="float-right font-weight-bold">FREE</span> </div>
-                                    <div class="ml-4 mb-2 small">(3-7 business days)</div>
-                                    <div class="custom-control custom-radio">
-                                        <input id="shippingOption2" name="shipping-option" class="custom-control-input" type="radio">
-                                        <label class="custom-control-label" for="shippingOption2">Express Delivery</label> <span class="float-right font-weight-bold">$10.00</span> </div>
-                                    <div class="ml-4 mb-2 small">(2-4 business days)</div>
-                                    <div class="custom-control custom-radio">
-                                        <input id="shippingOption3" name="shipping-option" class="custom-control-input" type="radio">
-                                        <label class="custom-control-label" for="shippingOption3">Next Business day</label> <span class="float-right font-weight-bold">$20.00</span> </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-12 col-lg-12">
-                            <div class="odr-box">
-                                <div class="title-left">
-                                    <h3>Shopping cart</h3>
-                                </div>
-                                <div class="rounded p-2 bg-light">
-                                    <div class="media mb-2 border-bottom">
-                                        <div class="media-body"> <a href="detail.html"> Lorem ipsum dolor sit amet</a>
-                                            <div class="small text-muted">Price: $80.00 <span class="mx-2">|</span> Qty: 1 <span class="mx-2">|</span> Subtotal: $80.00</div>
-                                        </div>
-                                    </div>
-                                    <div class="media mb-2 border-bottom">
-                                        <div class="media-body"> <a href="detail.html"> Lorem ipsum dolor sit amet</a>
-                                            <div class="small text-muted">Price: $60.00 <span class="mx-2">|</span> Qty: 1 <span class="mx-2">|</span> Subtotal: $60.00</div>
-                                        </div>
-                                    </div>
-                                    <div class="media mb-2">
-                                        <div class="media-body"> <a href="detail.html"> Lorem ipsum dolor sit amet</a>
-                                            <div class="small text-muted">Price: $40.00 <span class="mx-2">|</span> Qty: 1 <span class="mx-2">|</span> Subtotal: $40.00</div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                        
+                        
                         <div class="col-md-12 col-lg-12">
                             <div class="order-box">
                                 <div class="title-left">
@@ -447,10 +376,14 @@
                                     <h4>Discount</h4>
                                     <div class="ml-auto font-weight-bold"> $ 40 </div>
                                 </div>
+                                <div class="d-flex">
+                                    <h4> Paking charge </h4>
+                                    <div class="ml-auto font-weight-bold"> $ 20 </div>
+                                </div>
                                 <hr class="my-1">
                                 <div class="d-flex">
-                                    <h4>Coupon Discount</h4>
-                                    <div class="ml-auto font-weight-bold"> $ 10 </div>
+                                    <h3>Before Tax </h3>
+                                    <div class="ml-auto font-weight-bold"> $ 400 </div>
                                 </div>
                                 <div class="d-flex">
                                     <h4>Tax</h4>
@@ -674,6 +607,60 @@
     <script src="{% static 'js/form-validator.min.js' %}"></script>
     <script src="{% static 'js/contact-form-script.js' %}"></script>
     <script src="{% static 'js/custom.js' %}"></script>
+    <script>
+        var stateObject = {
+        "India": { "Delhi": ["new Delhi", "North Delhi"],
+        "Kerala": ["Alappuzha",
+        "Ernakulam",
+        "Idukki",
+        "Kannur",
+        "Kasaragod",
+        "Kollam",
+        "Kottayam",
+        "Kozhikode",
+        "Malappuram",
+        "Palakkad",
+        "Pathanamthitta",
+        "Thiruvananthapuram",
+        "Thrissur",
+        "Wayanad",
+        ],
+        "Goa": ["North Goa", "South Goa"],
+        },
+        "Australia": {
+        "South Australia": ["Dunstan", "Mitchell"],
+        "Victoria": ["Altona", "Euroa"]
+        }, "Canada": {
+        "Alberta": ["Acadia", "Bighorn"],
+        "Columbia": ["Washington", ""]
+        },
+        }
+        window.onload = function () {
+        var countySel = document.getElementById("countySel"),
+        stateSel = document.getElementById("stateSel"),
+        districtSel = document.getElementById("districtSel");
+        for (var country in stateObject) {
+        countySel.options[countySel.options.length] = new Option(country, country);
+        }
+        countySel.onchange = function () {
+        stateSel.length = 1; // remove all options bar first
+        districtSel.length = 1; // remove all options bar first
+        if (this.selectedIndex < 1) return; // done
+        for (var state in stateObject[this.value]) {
+        stateSel.options[stateSel.options.length] = new Option(state, state);
+        }
+        }
+        countySel.onchange(); // reset in case page is reloaded
+        stateSel.onchange = function () {
+        districtSel.length = 1; // remove all options bar first
+        if (this.selectedIndex < 1) return; // done
+        var district = stateObject[countySel.value][this.value];
+        for (var i = 0; i < district.length; i++) {
+        districtSel.options[districtSel.options.length] = new Option(district[i], district[i]);
+        }
+        }
+        }
+    </script> 
 </body>
 
 </html>

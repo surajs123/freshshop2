@@ -271,7 +271,8 @@
                 <div class="col-xl-7 col-lg-7 col-md-6">
                     <div class="single-product-details">
                         <h2>{{obj.name}}</h2>
-                        <h5> <del>$ {{obj.droup}}</del> ${{obj.price}}</h5>
+
+                        <h5> <del>$ {{obj.price}}</del> ${{sum}}</h5>
                         <p class="available-stock"><span> {{obj.quanty}} .Kg Available Now 
 						<h4>Short Description:</h4>
 						<p>{{obj.des}} </p>
@@ -279,25 +280,30 @@
 							<li>
 								<div class="form-group quantity-box">
 									<label class="control-label">Quantity</label>
-									<input class="form-control" value="1" min="1" max="50" type="number"><B>.Kg</B>
+                                    <form action="{% url 'checkout' %}" name="buyfun">
+									<input class="form-control" value="1" min="1" max="50" type="number" name="qty"><B>.Kg</B>
+                                    <input type="hidden" name= costa value="{{user.id}}">
+                                    <input type="hidden" name="froot" value="{{obj.id}}">
+                                    <input type="hidden" name="typin"  value="{{typ}}">
+                                    </form>
 								</div>
 							</li>
 						</ul>
 
 						<div class="price-box-bar">
 							<div class="cart-and-bay-btn">
-                                <form action={% url 'cart' %} method="POST" name="work">
+                                <form action="{% url 'cart' %}" method="POST" name="cart">
                                     {% csrf_token %}
-                                    <li><button type="submit" data-toggle="tooltip" data-placement="right" title="Add To Cart"><i class="fa fa-shopping-bag"></i></button></li>
+                                    
                                     {% if user.is_authenticated %}
                                     <input type="hidden" name= costa value="{{user.id}}">
                                     <input type="hidden" name="froot" value="{{obj.id}}">
                                     <input type="hidden" name="typin"  value="{{typ}}">
                                     {% endif %}
-								<a class="btn hvr-hover" data-fancybox-close="" href="#">Buy Now</a>
+								<a class="btn hvr-hover" data-fancybox-close="" onclick="document.buyfun.submit()">Buy Now</a>
                                 
-                                    <input type="hidden" value="podeyy" name="kanik">
-								<a class="btn hvr-hover" data-fancybox-close="" onclick="document.work.submit()">Add to cart</a>
+                                    
+								<a class="btn hvr-hover" data-fancybox-close="" onclick="document.cart.submit()">Add to cart</a>
                                 </form>
 							</div>
 						</div>
@@ -341,7 +347,7 @@
                         {% endfor %}
                     </div>
                     {% if user.is_authenticated %}
-                    <form action="{% url 'review' %} " method="POST" autocomplete="off">
+                    <form action="review/" method="POST" autocomplete="off">
                         {% csrf_token %}
                     <div class="card-header" style="display: flex;">
                         

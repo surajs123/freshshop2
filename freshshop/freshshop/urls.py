@@ -18,10 +18,19 @@ from django.urls import path, include
 from fruit.admin import fruit_site
 from django.conf import settings
 from vegetable.admin import vegitable_site
+from checkout.admin import checkout_site
 from django.conf.urls.static import static
 
 urlpatterns = [
+    path('', include('home.urls')),
+    path('fruit/', include('fruit.urls')),
+    path('vegitable/', include('vegetable.urls')),
     path('admin/', admin.site.urls),
     path('fruitadmin/', fruit_site.urls),
     path('vegitableadmin/', vegitable_site.urls),
+    path('Checkoutadmin/', checkout_site.urls),
+    path('account/', include('custamor.urls')),
+    path('checkout/', include('checkout.urls')),
 ]+ static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)
+
+
