@@ -33,7 +33,8 @@ def fdetail(request):
     obj = fruits.objects.get(id=val)
     rev = frureview.objects.filter(product_id=obj)
     food2 = fruits.objects.all()
-    return render(request, 'shop-detail.html',{'obj':obj,'food':food2, 'rev':rev,'typ':typ})
+    produt_sum = obj.price - obj.droup
+    return render(request, 'shop-detail.html',{'obj':obj,'food':food2, 'rev':rev,'typ':typ, 'sum':produt_sum})
 
     
     
