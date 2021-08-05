@@ -18,9 +18,9 @@ def froot(request):
 
     if request.method == 'POST':
         value = request.POST['search']
-        obj = fruits.objects.filter(name=value)
-    
+        obj = fruits.objects.get(name=value)
 
+       
         return render(request, 'shop.html',{'food':obj, 'qty':count2, 'cata':cata2, 'act1':'active','typ':typ})
 
     else:
@@ -33,8 +33,14 @@ def fdetail(request):
     obj = fruits.objects.get(id=val)
     rev = frureview.objects.filter(product_id=obj)
     food2 = fruits.objects.all()
-    produt_sum = obj.price - obj.droup
-    return render(request, 'shop-detail.html',{'obj':obj,'food':food2, 'rev':rev,'typ':typ, 'sum':produt_sum})
+    
+    # this will find the actual price for the product 
+    
+    
+    
+    
+
+    return render(request, 'shop-detail.html',{'obj':obj,'food':food2, 'rev':rev,'typ':typ,})
 
     
     
