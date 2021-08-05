@@ -12,7 +12,7 @@ from vegetable.models import vegitable
 
 
 def myaccount(request):
-    return render(request, 'checkout.html')
+    return render(request, 'wishlist.html')
 
 def regist(request):
     

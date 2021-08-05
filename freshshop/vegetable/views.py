@@ -27,7 +27,8 @@ def vdetail(request):
     obj = vegitable.objects.get(id=val)
     food2 = vegitable.objects.all()
     rev = vegreview.objects.filter(product_id=obj)
-    return render(request, 'shop-detail.html',{'obj':obj,'food':food2, 'rev':rev, 'typ':typ})  
+    produt_sum = obj.price - obj.droup
+    return render(request, 'shop-detail.html',{'obj':obj,'food':food2, 'rev':rev, 'typ':typ, 'sum':produt_sum})  
 
 
 def vegview(request):

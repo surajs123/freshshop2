@@ -13,10 +13,25 @@ class vegitable(models.Model):
     img = models.ImageField(upload_to = 'froot', null=True, blank=True)
     img2 = models.ImageField(upload_to = 'froot',blank=True, null=True)
     img3 = models.ImageField(upload_to = 'froot', blank=True, null=True)
-    droup = models.FloatField(blank=True, null=True)
-    price = models.FloatField()
+    price = models.FloatField(default=0.00)
+    pakking = models.FloatField(blank=True, default=0.00)
+    discount = models.FloatField(blank=True,)
+    tax = models.FloatField(blank=True, default=0, help_text='Enter the persatage of tax')
     offer = models.BooleanField(default=False)
     des = models.TextField(blank=True, null=True)
+    
+
+    @property
+    def net_price(self):
+        tax =  self.price * (self.tax /100)
+        price = (self.price - self.discount) + tax + self.pakking
+        return price
+
+    @property
+    def droup(self):
+        tax =  self.price * (self.tax /100)  
+        droup = self.price + tax + self.pakking 
+        return droup
 
     def __str__(self):
         return self.name
