@@ -85,19 +85,20 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-					<div class="custom-select-box">
-                        <select id="basic" class="selectpicker show-tick form-control" data-placeholder="$ USD">
-							<option>¥ JPY</option>
-							<option>$ USD</option>
-							<option>€ EUR</option>
-						</select>
-                    </div>
+					
                     <div class="right-phone-box">
                         <p>Call US :- <a href="#"> +11 900 800 100</a></p>
                     </div>
                     <div class="our-link">
                         <ul>
-                            <li><a href="#"><i class="fa fa-user s_color"></i> My Account</a></li>
+                            {% if user.is_authenticated %}
+
+                            <li><a href="{% url 'account' %}"><i class="fa fa-user s_color"></i>  &nbsp;&nbsp;{{user.user_name}}</a></li>
+
+                            {% else %}
+                            <li><a href="{% url 'account' %}"><i class="fa fa-user s_color"></i> My Account</a></li>
+
+                            {% endif %}
                             <li><a href="#"><i class="fas fa-location-arrow"></i> Our location</a></li>
                             <li><a href="#"><i class="fas fa-headset"></i> Contact Us</a></li>
                         </ul>
@@ -163,72 +164,42 @@
                 <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class="collapse navbar-collapse" id="navbar-menu">
                     <ul class="nav navbar-nav ml-auto" data-in="fadeInDown" data-out="fadeOutUp">
-                        <li class="nav-item"><a class="nav-link" href="{% url 'index' %}">Home</a></li>
+                        <li class="nav-item active"><a class="nav-link" href="{% url 'index' %}">Home</a></li>
                         <li class="nav-item"><a class="nav-link" href="about.html">About Us</a></li>
-                        <li class="dropdown active">
-                            <a href="#" class="nav-link dropdown-toggle arrow" data-toggle="dropdown">SHOP</a>
-                            <ul class="dropdown-menu">
-								<li><a href="{% url 'froot' %}">Sidebar Shop</a></li>
-								
-                                
-                                <li><a href="{% url 'account' %}">Checkout</a></li>
-                                <li><a href="my-account.html">My Account</a></li>
-                                <li><a href="wishlist.html">Wishlist</a></li>
-                            </ul>
-                        </li>
+                        
+                        <li class="nav-item"><a href="{% url 'froot' %}" class="nav-link" >SHOP</a></li>
+                        
                         
                         <li class="nav-item"><a class="nav-link" href="contact-us.html">Contact Us</a></li>
+                        {% if user.is_authenticated %}
+
+                        
+                        <li class="nav-item"><a class="nav-link" href="{% url 'logout' %}"> logout </a></li>
+                        {% endif %}
                     </ul>
                 </div>
                 <!-- /.navbar-collapse -->
 
-                <!-- Start Atribute Navigation -->
+                <!-- Start Cart -->
                 <div class="attr-nav">
                     <ul>
-                        <li class="search"><a href="#"><i class="fa fa-search"></i></a></li>
+                       
                         <li >
                             
-							
+                        {% if user.is_authenticated %} 	
                             <a href="/account/carten/?cos_id={{user.id}}">
 								<i class="fa fa-shopping-bag"></i>
                                 My Cart
 								<span class="badge">{{count}}</span>
 								
 							</a>
-                        
+                        {% endif %}
 						</li>
                     </ul>
                 </div>
-                <!-- End Atribute Navigation -->
+                <!-- End Cart-->
             </div>
-            <!-- Start Side Menu -->
-            <div class="side">
-                <a href="#" class="close-side"><i class="fa fa-times"></i></a>
-                <li class="cart-box">
-                    <ul class="cart-list">
-                        <li>
-                            <a href="#" class="photo"><img src="{% static 'images/img-pro-01.jpg' %}" class="cart-thumb" alt="" /></a>
-                            <h6><a href="#">Delica omtantur </a></h6>
-                            <p>1x - <span class="price">$80.00</span></p>
-                        </li>
-                        <li>
-                            <a href="#" class="photo"><img src="{% static 'images/img-pro-02.jpg' %}" class="cart-thumb" alt="" /></a>
-                            <h6><a href="#">Omnes ocurreret</a></h6>
-                            <p>1x - <span class="price">$60.00</span></p>
-                        </li>
-                        <li>
-                            <a href="#" class="photo"><img src="{% static 'images/img-pro-03.jpg' %}" class="cart-thumb" alt="" /></a>
-                            <h6><a href="#">Agam facilisis</a></h6>
-                            <p>1x - <span class="price">$40.00</span></p>
-                        </li>
-                        <li class="total">
-                            <a href="{% url 'carten' %}" class="btn btn-default hvr-hover btn-cart">VIEW CART</a>
-                            <span class="float-right"><strong>Total</strong>: $180.00</span>
-                        </li>
-                    </ul>
-                </li>
-            </div>
-            <!-- End Side Menu -->
+            
         </nav>
         <!-- End Navigation -->
     </header>
@@ -276,9 +247,9 @@
                                         {% csrf_token %}
                                         <div class="input-group">
                                            
-                                            
+                                            <!-- surching the products -->
                                            
-                                            <input name= "search" type="text" class="form-control" placeholder="Search" id="tags" style="background: rgba(0, 0, 0, 0.555); border:none; color:#ffffff;">
+                                            <input name= "search" type="text" class="form-control" placeholder="Search" id="{{typ}}" style="background: rgba(0, 0, 0, 0.555); border:none; color:#ffffff;">
                                             
                                             
                                             <a onclick="document.work2.submit()"><div class="input-group-addon" id="search"><i class="fa fa-search" style="margin:auto;"></i></div></a>
@@ -309,6 +280,9 @@
                             <div class="tab-content">
                                 <div role="tabpanel" class="tab-pane fade show active" id="grid-view">
                                     <div class="row">
+
+                        <!-- product listing start with -->
+
                                     {% for furt in food %}   
                                         <div class="col-sm-6 col-md-6 col-lg-4 col-xl-4">
                                             <div class="products-single fix">
@@ -321,7 +295,7 @@
                                                         <ul>
                                                             <form action="cart/" method="POST" name="work">
                                                             {% csrf_token %}
-                                                           
+                                                           <!-- cart function was work hire -->
                                                             {% if user.is_authenticated %}
                                                             <input type="hidden" name= "costa" value="{{user.id}}">
                                                             <input type="hidden" name="froot" value="{{furt.id}}">
@@ -347,12 +321,16 @@
                                                 <div class="why-text">
                                                     <h4>{{furt.name}}</h4>
                                                     
-                                                    <h5> ${{furt.net_price}}</h5>
+                                                    <h5> ₹{{furt.net_price}}</h5>
                                                     
                                                 </div>
                                             </div>
                                         </div>
                                     {% endfor %}    
+
+
+                    <!-- the product listing end -->
+
                                     </div>
                                 </div>
                                 
@@ -392,14 +370,10 @@
                         </div>
                         <div class="filter-price-left">
                             <div class="title-left">
-                                <h3>Price</h3>
+                                
                             </div>
                             <div class="price-box-slider">
-                                <div id="slider-range"></div>
-                                <p>
-                                    <input type="text" id="amount" readonly style="border:0; color:#fbb714; font-weight:bold;">
-                                    <button class="btn hvr-hover" type="submit">Filter</button>
-                                </p>
+                                
                             </div>
                         </div>
                     </div>
@@ -612,8 +586,16 @@
     <script>
         $( function() {
           
-          $( "#tags" ).autocomplete({
-            source: '{% url 'autocomplete' %}'
+          $( "#fruit" ).autocomplete({
+            source: '{% url 'autocompleteF' %}'
+          });
+        } );
+    </script>
+    <script>
+        $( function() {
+          
+          $( "#vegita" ).autocomplete({
+            source: '{% url 'autocompleteV' %}'
           });
         } );
     </script>

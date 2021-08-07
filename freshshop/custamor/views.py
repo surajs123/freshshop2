@@ -97,7 +97,9 @@ def cartfun(request):
        if typeof == 'fruit':
            obj_th1 = fruits.objects.get(id=obj_id)
            costa = onlineuser.objects.get(id=cos)
-           if CartModelFruite.objects.filter(product=obj_th1).exists():
+           #using coustamor id to filter the cart and check the cart product is exists or not 
+           cou_filter = CartModelFruite.objects.filter(costamor=costa)
+           if cou_filter.filter(product=obj_th1).exists():
                print("alredy add this  product")
 
            else:

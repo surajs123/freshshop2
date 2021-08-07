@@ -15,19 +15,35 @@ for totf in qtyf:
     count2 =count2+totf.quanty
 typ = 'fruit'
 def froot(request):
+    # this will count the number of cart in user saved
+    count= 0
+    if request.user.is_authenticated:
+        login_user= request.user
+        user_now= onlineuser.objects.get(id=login_user.id)
+        count1 = CartModelFruite.objects.filter(costamor=user_now).count()
+        count3 = CartModelvegitable.objects.filter(costamor=user_now).count()
+        count = count1+count3
 
     if request.method == 'POST':
         value = request.POST['search']
         obj = fruits.objects.get(name=value)
 
        
-        return render(request, 'shop.html',{'food':obj, 'qty':count2, 'cata':cata2, 'act1':'active','typ':typ})
+        return render(request, 'shop.html',{'food':obj, 'qty':count2, 'cata':cata2, 'act1':'active','typ':typ, 'count':count})
 
     else:
         food = fruits.objects.all()
-        return render(request, 'shop.html',{'food':food, 'qty':count2, 'cata':cata2, 'act1':'active','typ':typ})
+        return render(request, 'shop.html',{'food':food, 'qty':count2, 'cata':cata2, 'act1':'active','typ':typ,'count':count})
 
 def fdetail(request):
+    # this will count the number of cart in user saved
+    count= 0
+    if request.user.is_authenticated:
+        login_user= request.user
+        user_now= onlineuser.objects.get(id=login_user.id)
+        count1 = CartModelFruite.objects.filter(costamor=user_now).count()
+        count3 = CartModelvegitable.objects.filter(costamor=user_now).count()
+        count = count1+count3
     
     val = request.GET['product']
     obj = fruits.objects.get(id=val)
@@ -40,7 +56,7 @@ def fdetail(request):
     
     
 
-    return render(request, 'shop-detail.html',{'obj':obj,'food':food2, 'rev':rev,'typ':typ,})
+    return render(request, 'shop-detail.html',{'obj':obj,'food':food2, 'rev':rev,'typ':typ,'count':count})
 
     
     

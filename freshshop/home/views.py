@@ -8,9 +8,14 @@ from vegetable.models import vegitable
 # Create your views here.
 
 def index(request):
-    count1 = CartModelFruite.objects.all().count()
-    count2 = CartModelvegitable.objects.all().count()
-    count = count1+count2
+    # this will count the number of cart in user saved
+    count= 0
+    if request.user.is_authenticated:
+        login_user= request.user
+        user_now= onlineuser.objects.get(id=login_user.id)
+        count1 = CartModelFruite.objects.filter(costamor=user_now).count()
+        count2 = CartModelvegitable.objects.filter(costamor=user_now).count()
+        count = count1+count2 
 
     return render (request, 'index.html',{'count':count} )
 

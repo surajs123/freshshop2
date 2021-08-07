@@ -133,40 +133,45 @@
                 </div>
                 <!-- End Header Navigation -->
 
+                <!-- End Header Navigation -->
+
                 <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class="collapse navbar-collapse" id="navbar-menu">
                     <ul class="nav navbar-nav ml-auto" data-in="fadeInDown" data-out="fadeOutUp">
-                        <li class="nav-item"><a class="nav-link" href="{% url 'index' %}">Home</a></li>
+                        <li class="nav-item active"><a class="nav-link" href="{% url 'index' %}">Home</a></li>
                         <li class="nav-item"><a class="nav-link" href="about.html">About Us</a></li>
-                        <li class="dropdown active">
-                            <a href="#" class="nav-link dropdown-toggle arrow" data-toggle="dropdown">SHOP</a>
-                            <ul class="dropdown-menu">
-								<li><a href="{% url 'froot' %}">Sidebar Shop</a></li>
-								
-                                
-                                <li><a href="checkout.html">Checkout</a></li>
-                                <li><a href="my-account.html">My Account</a></li>
-                                <li><a href="wishlist.html">Wishlist</a></li>
-                            </ul>
-                        </li>
-                        <li class="nav-item"><a class="nav-link" href="gallery.html">Gallery</a></li>
+                        
+                        <li class="nav-item"><a href="{% url 'froot' %}" class="nav-link" >SHOP</a></li>
+                        
+                        
                         <li class="nav-item"><a class="nav-link" href="contact-us.html">Contact Us</a></li>
+                        {% if user.is_authenticated %}
+
+                        
+                        <li class="nav-item"><a class="nav-link" href="{% url 'logout' %}"> logout </a></li>
+                        {% endif %}
                     </ul>
                 </div>
                 <!-- /.navbar-collapse -->
 
-                <!-- Start Atribute Navigation -->
+                <!-- Start Cart -->
                 <div class="attr-nav">
                     <ul>
-                        <li class="search"><a href="#"><i class="fa fa-search"></i></a></li>
-                        <li class="side-menu"><a href="#">
-						<i class="fa fa-shopping-bag"></i>
-                            <span class="badge">3</span>
-							<p>My Cart</p>
-					</a></li>
+                       
+                        <li >
+                            
+                        {% if user.is_authenticated %} 	
+                            <a href="/account/carten/?cos_id={{user.id}}">
+								<i class="fa fa-shopping-bag"></i>
+                                My Cart
+								<span class="badge">{{count}}</span>
+								
+							</a>
+                        {% endif %}
+						</li>
                     </ul>
                 </div>
-                <!-- End Atribute Navigation -->
+                <!-- End Cart-->
             </div>
             <!-- Start Side Menu -->
             <div class="side">
@@ -272,7 +277,7 @@
                     <div class="single-product-details">
                         <h2>{{obj.name}}</h2>
 
-                        <h5> <del>$ {{ obj.droup }}</del> ${{obj.net_price}}</h5>
+                        <h5> <del>₹ {{ obj.droup }}</del> ₹{{obj.net_price}}</h5>
                         <p class="available-stock"><span> {{obj.quanty}} .Kg Available Now 
 						<h4>Short Description:</h4>
 						<p>{{obj.des}} </p>
@@ -302,8 +307,10 @@
                                     {% endif %}
 								<a class="btn hvr-hover" data-fancybox-close="" onclick="document.buyfun.submit()">Buy Now</a>
                                 
-                                    
+                                {% if user.is_authenticated %}     
 								<a class="btn hvr-hover" data-fancybox-close="" onclick="document.cart.submit()">Add to cart</a>
+
+                                {% endif %}
                                 </form>
 							</div>
 						</div>
@@ -402,7 +409,7 @@
                                 <div class="why-text">
                                     <h4>{{fod.name}}</h4>
                                     
-                                    <h5> ${{fod.net_price}}</h5>
+                                    <h5> ₹{{fod.net_price}}</h5>
                                     
                                 </div>
                             </div>

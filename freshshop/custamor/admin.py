@@ -3,7 +3,7 @@ from django.contrib import admin
 # Register your models here.
 from django.contrib import admin
 
-from .models import onlineuser
+from .models import onlineuser, CartModelvegitable, CartModelFruite
 from django.contrib.auth.admin import UserAdmin
 from django.forms import Textarea, TextInput
 # Register your models here.
@@ -18,9 +18,15 @@ class UserAdminConfig(UserAdmin):
     fieldsets = (
         (None, {'fields':('email', 'user_name', 'first_name',)}),
         ('personal', {'fields':('gender','address', 'place','pincode',)}),
-        ('Permissions', {'fields':('is_staff','is_active')}),
-        
+        ('Permissions', {'fields':( 'user_permissions','is_active')}),
+        ('SpecialPermissions',{'fields':('is_staff','is_superuser')}),
+       
     )
+
+    
+
+
+
     formfield_overrides = {
         onlineuser.address:{'widget': Textarea(attrs={'rows':30, 'cols':40})},
     }
@@ -37,3 +43,5 @@ class UserAdminConfig(UserAdmin):
 
 
 admin.site.register(onlineuser, UserAdminConfig)
+admin.site.register(CartModelvegitable)
+admin.site.register(CartModelFruite)

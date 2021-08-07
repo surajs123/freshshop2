@@ -2,6 +2,7 @@ from django.db.models.query_utils import Q
 from django.http.response import JsonResponse
 from django.shortcuts import render, redirect
 from .models import vegitable, vegreview
+from custamor.models import onlineuser, CartModelFruite, CartModelvegitable
 # Create your views here.
 qtyv = vegitable.objects.all()
 count1 =0
@@ -11,15 +12,23 @@ for totv in qtyv:
 
 
 def vegi(request):
+    # this will count the number of cart in user saved
+    count= 0
+    if request.user.is_authenticated:
+        login_user= request.user
+        user_now= onlineuser.objects.get(id=login_user.id)
+        count3 = CartModelFruite.objects.filter(costamor=user_now).count()
+        count2 = CartModelvegitable.objects.filter(costamor=user_now).count()
+        count = count3+count2
     if request.method == 'POST':
         value = request.POST['search']
         obj = vegitable.objects.filter(name=value)
 
-        return render(request, 'shop.html',{'food':obj, 'qty':count1, 'cata':' VEGITABLE ', 'act2':'active', 'typ':typ})
+        return render(request, 'shop.html',{'food':obj, 'qty':count1, 'cata':' VEGITABLE ', 'act2':'active', 'typ':typ,'count':count})
     
     else:
         food = vegitable.objects.all()
-        return render(request, 'shop.html',{'food':food, 'qty':count1, 'cata':' VEGITABLE ', 'act2':'active', 'typ':typ})
+        return render(request, 'shop.html',{'food':food, 'qty':count1, 'cata':' VEGITABLE ', 'act2':'active', 'typ':typ,'count':count})
 
 def vdetail(request):
     
