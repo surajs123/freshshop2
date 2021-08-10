@@ -1,8 +1,10 @@
+from django.contrib.auth import login
 from django.db.models.query_utils import Q
 from django.http.response import JsonResponse
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from custamor.models import onlineuser, CartModelFruite, CartModelvegitable
 from fruit.models import fruits
+from django.contrib import messages
 from vegetable.models import vegitable
 
 # Create your views here.
@@ -49,4 +51,55 @@ def autocom(request):
 
 def surch(request):
     pass          
+
+
+
+def update_user(request,id):
     
+    if request.method == 'POST':
+        
+        user_name=request.POST['user_name']
+        first_name=request.POST['first_name']
+        last_name=request.POST['last_name']
+        gender=request.POST['gender']
+        address=request.POST['address']
+        place=request.POST['place']
+        pincode=request.POST['pincode']
+        
+
+        
+
+        if  user_name != '':
+            
+            onlineuser.objects.filter(id=id).update(user_name=user_name,first_name=first_name, last_name=last_name,gender=gender,address=address,
+            place=place,pincode=pincode, is_active=True)
+
+            print('the user updated  ')
+            
+            
+            
+            
+            
+                    
+                    
+            
+        else:
+            messages.warning(request, " please fill the fields ") 
+            return redirect('updateuser')
+        
+        return redirect('/')      
+
+    else:
+
+        user = onlineuser.objects.get(id=id)
+
+        return render(request, 'register-update.html',{'userd':user})  
+
+        
+
+
+
+
+
+
+

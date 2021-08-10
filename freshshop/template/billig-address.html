@@ -18,7 +18,7 @@
 
     <!-- Site Icons -->
     <link rel="shortcut icon" href="{% static 'images/favicon.ico' %}" type="image/x-icon">
-    <link rel="apple-touch-icon" href="{% static 'images/apple-touch-icon.png' %}">
+    <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
@@ -54,7 +54,7 @@
                     </div>
                     <div class="our-link">
                         <ul>
-                            <li><a href="{% url 'account' %}"><i class="fa fa-user s_color"></i> My Account</a></li>
+                            <li><a href="#"><i class="fa fa-user s_color"></i> My Account</a></li>
                             <li><a href="#"><i class="fas fa-location-arrow"></i> Our location</a></li>
                             <li><a href="#"><i class="fas fa-headset"></i> Contact Us</a></li>
                         </ul>
@@ -119,22 +119,22 @@
 
                 <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class="collapse navbar-collapse" id="navbar-menu">
-					<ul class="nav navbar-nav ml-auto" data-in="fadeInDown" data-out="fadeOutUp">
-						<li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
-						<li class="nav-item"><a class="nav-link" href="about.html">About Us</a></li>
-						<li class="dropdown active">
-							<a href="#" class="nav-link dropdown-toggle arrow" data-toggle="dropdown">SHOP</a>
-							<ul class="dropdown-menu">
-								<li><a href="shop.html">Sidebar Shop</a></li>
+                    <ul class="nav navbar-nav ml-auto" data-in="fadeInDown" data-out="fadeOutUp">
+                        <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+                        <li class="nav-item"><a class="nav-link" href="about.html">About Us</a></li>
+                        <li class="dropdown active">
+                            <a href="#" class="nav-link dropdown-toggle arrow" data-toggle="dropdown">SHOP</a>
+                            <ul class="dropdown-menu">
+							
 								<li><a href="shop-detail.html">Shop Detail</a></li>
-								<li><a href="cart.html">Cart</a></li>
-								<li><a href="checkout.html">Checkout</a></li>
-								<li><a href="my-account.html">My Account</a></li>
-								<li><a href="wishlist.html">Wishlist</a></li>
-							</ul>
-						</li>
-						<li class="nav-item"><a class="nav-link" href="gallery.html">Gallery</a></li>
-						<li class="nav-item"><a class="nav-link" href="contact-us.html">Contact Us</a></li>
+                                <li><a href="cart.html">Cart</a></li>
+                                <li><a href="checkout.html">Checkout</a></li>
+                                <li><a href="my-account.html">My Account</a></li>
+                                <li><a href="wishlist.html">Wishlist</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item"><a class="nav-link" href="gallery.html">Gallery</a></li>
+                        <li class="nav-item"><a class="nav-link" href="contact-us.html">Contact Us</a></li>
                     </ul>
                 </div>
                 <!-- /.navbar-collapse -->
@@ -202,10 +202,10 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
-                    <h2>My Account</h2>
+                    <h2>Checkout</h2>
                     <ul class="breadcrumb">
                         <li class="breadcrumb-item"><a href="#">Shop</a></li>
-                        <li class="breadcrumb-item active">My Account</li>
+                        <li class="breadcrumb-item active">Checkout</li>
                     </ul>
                 </div>
             </div>
@@ -213,183 +213,207 @@
     </div>
     <!-- End All Title Box -->
 
-    <!-- Start My Account  -->
-    <div class="my-account-box-main">
+    <!-- Start Cart  -->
+    <div class="cart-box-main">
         <div class="container">
-            <div class="my-account-page">
-                <div class="row">
-                    <div class="col-lg-4 col-md-12">
-                        <div class="account-box">
-                            <div class="service-box">
-                                <div class="service-icon">
-                                    <a href="{% url 'order-summery' %}"> <i class="fa fa-gift"></i> </a>
+            
+            <div class="row">
+                <div class="col-sm-6 col-lg-6 mb-3">
+                    <div class="checkout-address">
+                        <div class="title-left">
+                            <h3>CREATE NEW BILLING ADDRESS</h3>
+                        </div>
+                        <form class="needs-validation" novalidate>
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label for="firstName">First name *</label>
+                                    <input type="text" class="form-control" id="firstName" placeholder="" value="" required>
+                                    <div class="invalid-feedback"> Valid first name is required. </div>
                                 </div>
-                                <div class="service-desc">
-                                    <h4>Your Orders</h4>
-                                    <p>Track, return, or buy things again</p>
+                                <div class="col-md-6 mb-3">
+                                    <label for="lastName">Last name *</label>
+                                    <input type="text" class="form-control" id="lastName" placeholder="" value="" required>
+                                    <div class="invalid-feedback"> Valid last name is required. </div>
                                 </div>
                             </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-md-12">
-                        <div class="account-box">
-                            <div class="service-box">
-                                <div class="service-icon">
-                                    <a href="#"><i class="fa fa-lock"></i> </a>
-                                </div>
-                                <div class="service-desc">
-                                    <h4>Login &amp; security</h4>
-                                    <p>Edit login, name, and mobile number</p>
+                            <div class="mb-3">
+                                <label for="username">Username *</label>
+                                <div class="input-group">
+                                    <input type="text" class="form-control" id="username" placeholder="" required>
+                                    <div class="invalid-feedback" style="width: 100%;"> Your username is required. </div>
                                 </div>
                             </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-md-12">
-                        <div class="account-box">
-                            <div class="service-box">
-                                <div class="service-icon">
-                                    <a href="{% url 'update_user' user.id %}"> <i class="fa fa-location-arrow"></i> </a>
+                            <div class="mb-3">
+                                <label for="email">Email Address *</label>
+                                <input type="email" class="form-control" id="email" placeholder="">
+                                <div class="invalid-feedback"> Please enter a valid email address for shipping updates. </div>
+                            </div>
+                            <div class="mb-3">
+                                <label for="address">Address *</label>
+                                <input type="text" class="form-control" id="address" placeholder="" required>
+                                <div class="invalid-feedback"> Please enter your shipping address. </div>
+                            </div>
+                            <div class="mb-3">
+                                <label for="address2">Address 2 *</label>
+                                <input type="text" class="form-control" id="address2" placeholder=""> </div>
+
+                            <div class="mb-3">
+                                    <label for="address2">phone-no : *</label>
+                                    <input type="text" class="form-control" id="address2" placeholder=""> </div>
+                            <div class="mb-3">
+                                        <label for="address2"> 2 phone-no: </label>
+                                        <input type="text" class="form-control" id="address2" placeholder=""> </div>            
+                            <div class="row">
+                                <form name="myform" id="myForm">
+                                <div class="col-md-5 mb-3">
+                                    <label for="country">Country *</label>
+                                    <select class="wide w-100" name="state" id="countySel" size="1">
+									<option value="Choose..." data-display="Select">Choose...</option>
+									<option value="United States">United States</option>
+								</select>
+                                    <div class="invalid-feedback"> Please select a valid country. </div>
                                 </div>
-                                <div class="service-desc">
-                                    <h4>Your Addresses</h4>
-                                    <p>Edit addresses for orders and gifts</p>
+                                <div class="col-md-4 mb-3">
+                                    <label for="state">State *</label>
+                                    <select class="wide w-100" name="countrya" id="stateSel" size="1">
+                                    <option value="" selected="selected">select Country </option>
+									
+								</select>
+                                    <div class="invalid-feedback"> Please provide a valid state. </div>
+                                </div>
+
+                                <div class="col-md-4 mb-3">
+                                    <label for="state">district *</label>
+                                    <select class="wide w-100" name="district" id="districtSel" size="1">
+                                    <option value="" selected="selected">select your district </option>
+									
+								</select>
+                                    <div class="invalid-feedback"> Please provide a valid state. </div>
+                                </div>
+                               
+                                <div class="col-md-3 mb-3">
+                                    <label for="zip">picode *</label>
+                                    <input type="number" class="form-control" id="zip" placeholder="" required>
+                                    <div class="invalid-feedback"> pincode code required. </div>
+                                </div>
+
+                                <div class="col-md-3 mb-3">
+                                <br><br><br>
+                                <button class="ml-auto btn hvr-hover" style="color: white; border-radius: 10px;" id="create_button">Create Address</button>
+                            </div>
+                            </form>
+                            </div>
+                            
+                            <hr class="mb-4">
+                            <div class="custom-control custom-checkbox">
+                                <input type="checkbox" class="custom-control-input" id="same-address">
+                                <label class="custom-control-label" for="same-address">Shipping address is the same as my billing address</label>
+                            </div>
+                            <div class="custom-control custom-checkbox">
+                                <input type="checkbox" class="custom-control-input" id="save-info">
+                                <label class="custom-control-label" for="save-info">Save this information for next time</label>
+                            </div>
+                            
+
+
+
+                            <!-- thr card payment -->
+
+
+                            <hr class="mb-4">
+                            <div class="title"> <span>Payment</span> </div>
+                            <div class="d-block my-3">
+                                <div class="custom-control custom-radio">
+                                    <input id="credit" name="paymentMethod" type="radio" class="custom-control-input" checked required>
+                                    <label class="custom-control-label" for="credit">Credit card</label>
+                                </div>
+                                <div class="custom-control custom-radio">
+                                    <input id="debit" name="paymentMethod" type="radio" class="custom-control-input" required>
+                                    <label class="custom-control-label" for="debit">Debit card</label>
+                                </div>
+                                <div class="custom-control custom-radio">
+                                    <input id="paypal" name="paymentMethod" type="radio" class="custom-control-input" required>
+                                    <label class="custom-control-label" for="paypal">Paypal</label>
                                 </div>
                             </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-md-12">
-                        <div class="account-box">
-                            <div class="service-box">
-                                <div class="service-icon">
-                                    <a href="#"> <i class="fa fa-credit-card"></i> </a>
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label for="cc-name">Name on card</label>
+                                    <input type="text" class="form-control" id="cc-name" placeholder="" required> <small class="text-muted">Full name as displayed on card</small>
+                                    <div class="invalid-feedback"> Name on card is required </div>
                                 </div>
-                                <div class="service-desc">
-                                    <h4>Payment options</h4>
-                                    <p>Edit or add payment methods</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-md-12">
-                        <div class="account-box">
-                            <div class="service-box">
-                                <div class="service-icon">
-                                    <a href="#"> <i class="fab fa-paypal"></i> </a>
-                                </div>
-                                <div class="service-desc">
-                                    <h4>PayPal</h4>
-                                    <p>View benefits and payment settings</p>
+                                <div class="col-md-6 mb-3">
+                                    <label for="cc-number">Credit card number</label>
+                                    <input type="text" class="form-control" id="cc-number" placeholder="" required>
+                                    <div class="invalid-feedback"> Credit card number is required </div>
                                 </div>
                             </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-md-12">
-                        <div class="account-box">
-                            <div class="service-box">
-                                <div class="service-icon">
-                                    <a href="#"> <i class="fab fa-amazon"></i> </a>
+                            <div class="row">
+                                <div class="col-md-3 mb-3">
+                                    <label for="cc-expiration">Expiration</label>
+                                    <input type="text" class="form-control" id="cc-expiration" placeholder="" required>
+                                    <div class="invalid-feedback"> Expiration date required </div>
                                 </div>
-                                <div class="service-desc">
-                                    <h4>Amazon Pay balance</h4>
-                                    <p>Add money to your balance</p>
+                                <div class="col-md-3 mb-3">
+                                    <label for="cc-expiration">CVV</label>
+                                    <input type="text" class="form-control" id="cc-cvv" placeholder="" required>
+                                    <div class="invalid-feedback"> Security code required </div>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <div class="payment-icon">
+                                        <ul>
+                                            <li><img class="img-fluid" src="{% static 'images/payment-icon/1.png' %}" alt=""></li>
+                                            <li><img class="img-fluid" src="{% static 'images/payment-icon/2.png' %}" alt=""></li>
+                                            <li><img class="img-fluid" src="{% static 'images/payment-icon/3.png' %}" alt=""></li>
+                                            <li><img class="img-fluid" src="{% static 'images/payment-icon/5.png' %}" alt=""></li>
+                                            <li><img class="img-fluid" src="{% static 'images/payment-icon/7.png' %}" alt=""></li>
+                                        </ul>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
+                            <hr class="mb-1"> </form>
                     </div>
                 </div>
-                <div class="bottom-box">
+                <div class="col-sm-6 col-lg-6 mb-3">
                     <div class="row">
-                        <div class="col-lg-4 col-md-12">
-                            <div class="account-box">
-                                <div class="service-box">
-                                    <div class="service-desc">
-                                        <h4>Gold &amp; Diamond Jewellery</h4>
-                                        <ul>
-                                            <li> <a href="#">Apps and more</a> </li>
-                                            <li> <a href="#">Content and devices</a> </li>
-                                            <li> <a href="#">Music settings</a> </li>
-                                        </ul>
-                                    </div>
+                        
+                        <!-- select the perevious billing address -->
+                        
+                        <div class="col-md-12 col-lg-12">
+                            <div class="order-box">
+                                <div class="title-left">
+                                    <h3> SELECT PREVIOUS BILLING ADDRESS</h3>
+                                    
                                 </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-4 col-md-12">
-                            <div class="account-box">
-                                <div class="service-box">
-                                    <div class="service-desc">
-                                        <h4>Handloom &amp; Handicraft Store</h4>
-                                        <ul>
-                                            <li> <a href="#">Advertising preferences </a> </li>
-                                            <li> <a href="#">Communication preferences</a> </li>
-                                            <li> <a href="#">SMS alert preferences</a> </li>
-                                            <li> <a href="#">Message center</a> </li>
-                                        </ul>
-                                    </div>
+                                {% for i in cout %}
+                                <div style="line-height: 95%;">
+                                    <input type="checkbox"   id="check{{forloop.counter}}"  onchange="checkfun({{forloop.counter}})"> &nbsp;<small>select this address </small><br><BR>
+                                    <b>Suraj s</b><br><BR>
+                                    <label>suraj bhavan chakkakakdu vellumannady p.o </label><br>
+                                    <label>perumzla</label><br>
+                                    <label>Thiruvananthapuram</label><br>
+                                    <label>Kerala</label><br>
+                                    <label>India</label><br>
+                                    <label>pho:8137975933</label><br>
+                                    <a class="ml-auto btn hvr-hover" href="#" style="border-radius: 10px; color:white">Edit</a> &nbsp;&nbsp;&nbsp;
+                                    <a class="ml-auto btn hvr-hover" href="#" style="color: white; border-radius: 10px;">Remove</a>
+                                    <hr>
+                                    <p id="see"></p>
                                 </div>
-                            </div>
+                                {% endfor %}
+
+                                
+                                
+                                
                         </div>
-                        <div class="col-lg-4 col-md-12">
-                            <div class="account-box">
-                                <div class="service-box">
-                                    <div class="service-desc">
-                                        <h4>The Designer Boutique</h4>
-                                        <ul>
-                                            <li> <a href="#">Amazon Pay</a> </li>
-                                            <li> <a href="#">Bank accounts for refunds</a> </li>
-                                            <li> <a href="#">Coupons</a> </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-4 col-md-12">
-                            <div class="account-box">
-                                <div class="service-box">
-                                    <div class="service-desc">
-                                        <h4>Gift Boxes, Gift Tags, Greeting Cards</h4>
-                                        <ul>
-                                            <li> <a href="#">Leave delivery feedback</a> </li>
-                                            <li> <a href="#">Lists</a> </li>
-                                            <li> <a href="#">Photo ID proofs</a> </li>
-                                            <li> <a href="#">Profile</a> </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-4 col-md-12">
-                            <div class="account-box">
-                                <div class="service-box">
-                                    <div class="service-desc">
-                                        <h4>Other accounts</h4>
-                                        <ul>
-                                            <li> <a href="#">Amazon Business registration</a> </li>
-                                            <li> <a href="#">Seller account</a> </li>
-                                            <li> <a href="#">Amazon Web Services</a> </li>
-                                            <li> <a href="#">Login with Amazon</a> </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-4 col-md-12">
-                            <div class="account-box">
-                                <div class="service-box">
-                                    <div class="service-desc">
-                                        <h4>Shopping programs and rentals</h4>
-                                        <ul>
-                                            <li> <a href="#">Subscribe &amp; Save</a> </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                        
                     </div>
                 </div>
             </div>
+
         </div>
     </div>
-    <!-- End My Account -->
+    <!-- End Cart -->
 
     <!-- Start Instagram Feed  -->
     <div class="instagram-box">
@@ -412,7 +436,7 @@
             </div>
             <div class="item">
                 <div class="ins-inner-box">
-                    <img src="{% static 'images/instagram-img-03.jpg' %}" alt="" />
+                    <img src="images/instagram-img-03.jpg" alt="" />
                     <div class="hov-in">
                         <a href="#"><i class="fab fa-instagram"></i></a>
                     </div>
@@ -420,7 +444,7 @@
             </div>
             <div class="item">
                 <div class="ins-inner-box">
-                    <img src="{% static 'images/instagram-img-04.jpg' %}" alt="" />
+                    <img src="images/instagram-img-04.jpg" alt="" />
                     <div class="hov-in">
                         <a href="#"><i class="fab fa-instagram"></i></a>
                     </div>
@@ -428,7 +452,7 @@
             </div>
             <div class="item">
                 <div class="ins-inner-box">
-                    <img src="{% static 'images/instagram-img-05.jpg' %}" alt="" />
+                    <img src="images/instagram-img-05.jpg" alt="" />
                     <div class="hov-in">
                         <a href="#"><i class="fab fa-instagram"></i></a>
                     </div>
@@ -436,7 +460,7 @@
             </div>
             <div class="item">
                 <div class="ins-inner-box">
-                    <img src="{% static 'images/instagram-img-06.jpg'' %}" alt="" />
+                    <img src="images/instagram-img-06.jpg" alt="" />
                     <div class="hov-in">
                         <a href="#"><i class="fab fa-instagram"></i></a>
                     </div>
@@ -567,7 +591,7 @@
     <!-- Start copyright  -->
     <div class="footer-copyright">
         <p class="footer-company">All Rights Reserved. &copy; 2018 <a href="#">ThewayShop</a> Design By :
-            <a href="{% static 'https://html.design/' %}">html design</a></p>
+            <a href="https://html.design/">html design</a></p>
     </div>
     <!-- End copyright  -->
 
@@ -578,10 +602,34 @@
     <script src="{% static 'js/popper.min.js' %}"></script>
     <script src="{% static 'js/bootstrap.min.js' %}"></script>
     <!-- ALL PLUGINS -->
+    <script>
+        function checkfun(val){
+            var i;
+            for (i=1;i<5;i++){
+                if (i==val){
+                    continue;
+                }
+                
+                document.getElementById('check'+i).checked=false;
+            
+            
+            }
+            var con = document.getElementById('check'+val)
+            if (con.checked){
+                document.getElementById("create_button").disabled=true;
+            }
+            
+            else{
+                document.getElementById("create_button").disabled=false;
+            }
+
+        }
+
+    </script>
     <script src="{% static 'js/jquery.superslides.min.js' %}"></script>
     <script src="{% static 'js/bootstrap-select.js' %}"></script>
     <script src="{% static 'js/inewsticker.js' %}"></script>
-    <script src="{% static 'js/bootsnav.js' %}"></script>
+    <script src="{% static 'js/bootsnav.js.' %}"></script>
     <script src="{% static 'js/images-loded.min.js' %}"></script>
     <script src="{% static 'js/isotope.min.js' %}"></script>
     <script src="{% static 'js/owl.carousel.min.js' %}"></script>
@@ -589,6 +637,60 @@
     <script src="{% static 'js/form-validator.min.js' %}"></script>
     <script src="{% static 'js/contact-form-script.js' %}"></script>
     <script src="{% static 'js/custom.js' %}"></script>
+    <script>
+        var stateObject = {
+        "India": { "Delhi": ["new Delhi", "North Delhi"],
+        "Kerala": ["Alappuzha",
+        "Ernakulam",
+        "Idukki",
+        "Kannur",
+        "Kasaragod",
+        "Kollam",
+        "Kottayam",
+        "Kozhikode",
+        "Malappuram",
+        "Palakkad",
+        "Pathanamthitta",
+        "Thiruvananthapuram",
+        "Thrissur",
+        "Wayanad",
+        ],
+        "Goa": ["North Goa", "South Goa"],
+        },
+        "Australia": {
+        "South Australia": ["Dunstan", "Mitchell"],
+        "Victoria": ["Altona", "Euroa"]
+        }, "Canada": {
+        "Alberta": ["Acadia", "Bighorn"],
+        "Columbia": ["Washington", ""]
+        },
+        }
+        window.onload = function () {
+        var countySel = document.getElementById("countySel"),
+        stateSel = document.getElementById("stateSel"),
+        districtSel = document.getElementById("districtSel");
+        for (var country in stateObject) {
+        countySel.options[countySel.options.length] = new Option(country, country);
+        }
+        countySel.onchange = function () {
+        stateSel.length = 1; // remove all options bar first
+        districtSel.length = 1; // remove all options bar first
+        if (this.selectedIndex < 1) return; // done
+        for (var state in stateObject[this.value]) {
+        stateSel.options[stateSel.options.length] = new Option(state, state);
+        }
+        }
+        countySel.onchange(); // reset in case page is reloaded
+        stateSel.onchange = function () {
+        districtSel.length = 1; // remove all options bar first
+        if (this.selectedIndex < 1) return; // done
+        var district = stateObject[countySel.value][this.value];
+        for (var i = 0; i < district.length; i++) {
+        districtSel.options[districtSel.options.length] = new Option(district[i], district[i]);
+        }
+        }
+        }
+    </script> 
 </body>
 
 </html>

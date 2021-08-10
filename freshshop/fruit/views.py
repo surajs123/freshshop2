@@ -33,7 +33,7 @@ def froot(request):
 
     else:
         food = fruits.objects.all()
-        return render(request, 'shop.html',{'food':food, 'qty':count2, 'cata':cata2, 'act1':'active','typ':typ,'count':count})
+        return render(request, 'shop.html',{'food':food, 'qty':count2, 'cata':cata2, 'act1':'active','typ':typ,'count':count,'num':1})
 
 def fdetail(request):
     # this will count the number of cart in user saved

@@ -23,6 +23,9 @@ class Checkoutaddress(models.Model):
     contry = models.CharField (max_length=150)
     state = models.CharField(max_length=150)
     district = models.CharField(max_length=150)
+    phone_no1 = models.IntegerField(null=True)
+    phone_no2 = models.IntegerField(null=True)
+    active = models.BooleanField(default=True)
     pincode = models.IntegerField()
 
 
