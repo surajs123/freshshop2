@@ -223,68 +223,60 @@
                         <div class="title-left">
                             <h3>CREATE NEW BILLING ADDRESS</h3>
                         </div>
-                        <form class="needs-validation" novalidate>
+                        <form class="needs-validation" action="{% url 'bil_address' user.id %}" method="POST">
+                            {% csrf_token %}
                             <div class="row">
                                 <div class="col-md-6 mb-3">
                                     <label for="firstName">First name *</label>
-                                    <input type="text" class="form-control" id="firstName" placeholder="" value="" required>
+                                    <input type="text" class="form-control" id="bill1"  required name="firstname">
                                     <div class="invalid-feedback"> Valid first name is required. </div>
                                 </div>
                                 <div class="col-md-6 mb-3">
                                     <label for="lastName">Last name *</label>
-                                    <input type="text" class="form-control" id="lastName" placeholder="" value="" required>
+                                    <input type="text" class="form-control" id="bill2" name="lastname" required>
                                     <div class="invalid-feedback"> Valid last name is required. </div>
                                 </div>
                             </div>
-                            <div class="mb-3">
-                                <label for="username">Username *</label>
-                                <div class="input-group">
-                                    <input type="text" class="form-control" id="username" placeholder="" required>
-                                    <div class="invalid-feedback" style="width: 100%;"> Your username is required. </div>
-                                </div>
-                            </div>
-                            <div class="mb-3">
-                                <label for="email">Email Address *</label>
-                                <input type="email" class="form-control" id="email" placeholder="">
-                                <div class="invalid-feedback"> Please enter a valid email address for shipping updates. </div>
-                            </div>
+                           
+                           
                             <div class="mb-3">
                                 <label for="address">Address *</label>
-                                <input type="text" class="form-control" id="address" placeholder="" required>
+                                <input type="text" class="form-control" id="bill5" name="address1" required>
                                 <div class="invalid-feedback"> Please enter your shipping address. </div>
                             </div>
                             <div class="mb-3">
-                                <label for="address2">Address 2 *</label>
-                                <input type="text" class="form-control" id="address2" placeholder=""> </div>
+                                <label for="address2">Address 2 </label>
+                                <input type="text" class="form-control" id="address2" name="address2"> </div>
 
                             <div class="mb-3">
                                     <label for="address2">phone-no : *</label>
-                                    <input type="text" class="form-control" id="address2" placeholder=""> </div>
+                                    <input type="text" class="form-control" id="bill6" name="phone1" required> </div>
+                                    <div class="invalid-feedback"> Please enter your phone number </div>
                             <div class="mb-3">
-                                        <label for="address2"> 2 phone-no: </label>
-                                        <input type="text" class="form-control" id="address2" placeholder=""> </div>            
+                                        <label for="address2"> Secound phone-no: </label>
+                                        <input type="text" class="form-control" id="phone2" name="phone2" > </div>            
                             <div class="row">
-                                <form name="myform" id="myForm">
+                                
                                 <div class="col-md-5 mb-3">
                                     <label for="country">Country *</label>
-                                    <select class="wide w-100" name="state" id="countySel" size="1">
-									<option value="Choose..." data-display="Select">Choose...</option>
-									<option value="United States">United States</option>
+                                    <select class="wide w-100" name="country" id="bill7" size="1" required>
+									
+									<option value="" selected="selected">Select Country </option>
 								</select>
                                     <div class="invalid-feedback"> Please select a valid country. </div>
                                 </div>
                                 <div class="col-md-4 mb-3">
                                     <label for="state">State *</label>
-                                    <select class="wide w-100" name="countrya" id="stateSel" size="1">
+                                    <select class="wide w-100" name="state" id="bill8" size="1" required>
                                     <option value="" selected="selected">select Country </option>
-									
+									 
 								</select>
                                     <div class="invalid-feedback"> Please provide a valid state. </div>
                                 </div>
 
                                 <div class="col-md-4 mb-3">
                                     <label for="state">district *</label>
-                                    <select class="wide w-100" name="district" id="districtSel" size="1">
+                                    <select class="wide w-100" name="district" id="bill9" size="1" required>
                                     <option value="" selected="selected">select your district </option>
 									
 								</select>
@@ -293,26 +285,20 @@
                                
                                 <div class="col-md-3 mb-3">
                                     <label for="zip">picode *</label>
-                                    <input type="number" class="form-control" id="zip" placeholder="" required>
+                                    <input type="number" class="form-control" id="bill10" name="pin" required>
                                     <div class="invalid-feedback"> pincode code required. </div>
                                 </div>
-
+                                <input type="hidden" name="email" value="{{user.email }}">
                                 <div class="col-md-3 mb-3">
                                 <br><br><br>
-                                <button class="ml-auto btn hvr-hover" style="color: white; border-radius: 10px;" id="create_button">Create Address</button>
-                            </div>
-                            </form>
+                                <button class="ml-auto btn hvr-hover" style="color: white; border-radius: 10px;" id="create_button" onsubmit="submit()">Use New Address</button>
+                                </div>
+                                </div>
+                            
+                             </form>
                             </div>
                             
-                            <hr class="mb-4">
-                            <div class="custom-control custom-checkbox">
-                                <input type="checkbox" class="custom-control-input" id="same-address">
-                                <label class="custom-control-label" for="same-address">Shipping address is the same as my billing address</label>
-                            </div>
-                            <div class="custom-control custom-checkbox">
-                                <input type="checkbox" class="custom-control-input" id="save-info">
-                                <label class="custom-control-label" for="save-info">Save this information for next time</label>
-                            </div>
+                            <div class="row">
                             
 
 
@@ -320,58 +306,10 @@
                             <!-- thr card payment -->
 
 
-                            <hr class="mb-4">
-                            <div class="title"> <span>Payment</span> </div>
-                            <div class="d-block my-3">
-                                <div class="custom-control custom-radio">
-                                    <input id="credit" name="paymentMethod" type="radio" class="custom-control-input" checked required>
-                                    <label class="custom-control-label" for="credit">Credit card</label>
-                                </div>
-                                <div class="custom-control custom-radio">
-                                    <input id="debit" name="paymentMethod" type="radio" class="custom-control-input" required>
-                                    <label class="custom-control-label" for="debit">Debit card</label>
-                                </div>
-                                <div class="custom-control custom-radio">
-                                    <input id="paypal" name="paymentMethod" type="radio" class="custom-control-input" required>
-                                    <label class="custom-control-label" for="paypal">Paypal</label>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-6 mb-3">
-                                    <label for="cc-name">Name on card</label>
-                                    <input type="text" class="form-control" id="cc-name" placeholder="" required> <small class="text-muted">Full name as displayed on card</small>
-                                    <div class="invalid-feedback"> Name on card is required </div>
-                                </div>
-                                <div class="col-md-6 mb-3">
-                                    <label for="cc-number">Credit card number</label>
-                                    <input type="text" class="form-control" id="cc-number" placeholder="" required>
-                                    <div class="invalid-feedback"> Credit card number is required </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-3 mb-3">
-                                    <label for="cc-expiration">Expiration</label>
-                                    <input type="text" class="form-control" id="cc-expiration" placeholder="" required>
-                                    <div class="invalid-feedback"> Expiration date required </div>
-                                </div>
-                                <div class="col-md-3 mb-3">
-                                    <label for="cc-expiration">CVV</label>
-                                    <input type="text" class="form-control" id="cc-cvv" placeholder="" required>
-                                    <div class="invalid-feedback"> Security code required </div>
-                                </div>
-                                <div class="col-md-6 mb-3">
-                                    <div class="payment-icon">
-                                        <ul>
-                                            <li><img class="img-fluid" src="{% static 'images/payment-icon/1.png' %}" alt=""></li>
-                                            <li><img class="img-fluid" src="{% static 'images/payment-icon/2.png' %}" alt=""></li>
-                                            <li><img class="img-fluid" src="{% static 'images/payment-icon/3.png' %}" alt=""></li>
-                                            <li><img class="img-fluid" src="{% static 'images/payment-icon/5.png' %}" alt=""></li>
-                                            <li><img class="img-fluid" src="{% static 'images/payment-icon/7.png' %}" alt=""></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                            <hr class="mb-1"> </form>
+                            
+                           
+                          
+                        
                     </div>
                 </div>
                 <div class="col-sm-6 col-lg-6 mb-3">
@@ -379,31 +317,35 @@
                         
                         <!-- select the perevious billing address -->
                         
-                        <div class="col-md-12 col-lg-12">
+                        <div class="col-md-12 col-lg-12" style="background: rgba(197, 192, 192, 0.212);">
                             <div class="order-box">
                                 <div class="title-left">
                                     <h3> SELECT PREVIOUS BILLING ADDRESS</h3>
                                     
                                 </div>
-                                {% for i in cout %}
-                                <div style="line-height: 95%;">
-                                    <input type="checkbox"   id="check{{forloop.counter}}"  onchange="checkfun({{forloop.counter}})"> &nbsp;<small>select this address </small><br><BR>
-                                    <b>Suraj s</b><br><BR>
-                                    <label>suraj bhavan chakkakakdu vellumannady p.o </label><br>
-                                    <label>perumzla</label><br>
-                                    <label>Thiruvananthapuram</label><br>
-                                    <label>Kerala</label><br>
-                                    <label>India</label><br>
-                                    <label>pho:8137975933</label><br>
-                                    <a class="ml-auto btn hvr-hover" href="#" style="border-radius: 10px; color:white">Edit</a> &nbsp;&nbsp;&nbsp;
-                                    <a class="ml-auto btn hvr-hover" href="#" style="color: white; border-radius: 10px;">Remove</a>
+                                <div style="overflow-x: hidden; overflow-y:scroll;height:500px;">
+                                {% for count in cout %}
+                                <div style="line-height: 95%;background: rgba(197, 192, 192, 0.356); padding:10px" >
+                                    <input type="checkbox"   id="check{{forloop.counter}}"  onchange="checkfun({{forloop.counter}})" style="height:20px;width:20px;"> 
+                                    &nbsp;<small>select this address </small><br><BR>
+                                    <b>{{count.first_name}} {{count.last_name}}</b><br><BR>
+                                    <label>{{count.address1}} </label><br>
+                                    <label>{{count.state}}</label><br>
+                                    <label>{{count.district}}</label><br>
+                                    <label>{{count.contry}}</label><br>
+                                    <label>ph: {{count.phone_no1}} </label><br>
+                                    <a class="ml-auto btn hvr-hover" href="{% url 'editaddress' count.id %}" style="border-radius: 10px; background:white; border:3px solid grey;">Edit</a> &nbsp;&nbsp;&nbsp;
+                                    <a class="ml-auto btn hvr-hover" href="{% url 'removeaddress' count.id user.id%}" style=" border-radius: 10px; background:white; border:3px solid grey;">Remove</a>
                                     <hr>
-                                    <p id="see"></p>
+                                    
                                 </div>
                                 {% endfor %}
 
-                                
-                                
+                               </div> 
+                               <hr>
+                               <div class="col-md-3 mb-3">
+                                <button class="ml-auto btn hvr-hover" style="color: white; border-radius: 10px; background:grey" id="select_button" disabled>Use Selected Address</button>
+                                </div>
                                 
                         </div>
                         
@@ -617,15 +559,24 @@
             var con = document.getElementById('check'+val)
             if (con.checked){
                 document.getElementById("create_button").disabled=true;
+                document.getElementById("select_button").disabled=false;
             }
             
             else{
                 document.getElementById("create_button").disabled=false;
+                document.getElementById("select_button").disabled=true;
             }
+            
 
         }
 
     </script>
+    <script>
+        if ({{msg.district_m}} == true){
+            alert("pleses enter this");
+        }
+    </script>
+  
     <script src="{% static 'js/jquery.superslides.min.js' %}"></script>
     <script src="{% static 'js/bootstrap-select.js' %}"></script>
     <script src="{% static 'js/inewsticker.js' %}"></script>
@@ -666,9 +617,9 @@
         },
         }
         window.onload = function () {
-        var countySel = document.getElementById("countySel"),
-        stateSel = document.getElementById("stateSel"),
-        districtSel = document.getElementById("districtSel");
+        var countySel = document.getElementById("bill7"),
+        stateSel = document.getElementById("bill8"),
+        districtSel = document.getElementById("bill9");
         for (var country in stateObject) {
         countySel.options[countySel.options.length] = new Option(country, country);
         }

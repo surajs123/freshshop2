@@ -48,9 +48,7 @@ def autocom(request):
         
 
     return render(request, 'index.html')
-
-def surch(request):
-    pass          
+         
 
 
 

@@ -12,8 +12,7 @@ from vegetable.models import vegitable
 
 
 def myaccount(request):
-    cout = onlineuser.objects.all()
-    return render(request, 'billig-address.html', {'cout':cout})
+    return render(request, 'my-account.html')
 
 def regist(request):
     

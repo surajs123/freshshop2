@@ -18,7 +18,7 @@
 
     <!-- Site Icons -->
     <link rel="shortcut icon" href="{% static 'images/favicon.ico' %}" type="image/x-icon">
-    <link rel="apple-touch-icon" href="{% static 'images/apple-touch-icon.png' %}">
+    <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
@@ -33,22 +33,6 @@
       <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
       <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
-
-        <style>
-            #iconlet{
-                 width: 60px;
-                 height: 60px;
-                 background-color: green;
-                 border-radius: 50%;
-                 display: flex;
-                 align-items: center;
-                 justify-content: center;
-                 color: honeydew;
-                 font-size: 170%;
-                 text-transform: uppercase;
-            }
-
-        </style>
 
 </head>
 
@@ -129,49 +113,44 @@
                     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-menu" aria-controls="navbars-rs-food" aria-expanded="false" aria-label="Toggle navigation">
                     <i class="fa fa-bars"></i>
                 </button>
-                    <a class="navbar-brand" href="index.html"><img src="images/logo.png" class="logo" alt=""></a>
+                    <a class="navbar-brand" href="index.html"><img src="{% static 'images/logo.png' %}" class="logo" alt=""></a>
                 </div>
-                <!-- End Header Navigation -->
-
                 <!-- End Header Navigation -->
 
                 <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class="collapse navbar-collapse" id="navbar-menu">
                     <ul class="nav navbar-nav ml-auto" data-in="fadeInDown" data-out="fadeOutUp">
-                        <li class="nav-item active"><a class="nav-link" href="{% url 'index' %}">Home</a></li>
+                        <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
                         <li class="nav-item"><a class="nav-link" href="about.html">About Us</a></li>
-                        
-                        <li class="nav-item"><a href="{% url 'froot' %}" class="nav-link" >SHOP</a></li>
-                        
-                        
+                        <li class="dropdown active">
+                            <a href="#" class="nav-link dropdown-toggle arrow" data-toggle="dropdown">SHOP</a>
+                            <ul class="dropdown-menu">
+							
+								<li><a href="shop-detail.html">Shop Detail</a></li>
+                                <li><a href="cart.html">Cart</a></li>
+                                <li><a href="checkout.html">Checkout</a></li>
+                                <li><a href="my-account.html">My Account</a></li>
+                                <li><a href="wishlist.html">Wishlist</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item"><a class="nav-link" href="gallery.html">Gallery</a></li>
                         <li class="nav-item"><a class="nav-link" href="contact-us.html">Contact Us</a></li>
-                        {% if user.is_authenticated %}
-
-                        
-                        <li class="nav-item"><a class="nav-link" href="{% url 'logout' %}"> logout </a></li>
-                        {% endif %}
                     </ul>
                 </div>
                 <!-- /.navbar-collapse -->
 
-                <!-- Start Cart -->
+                <!-- Start Atribute Navigation -->
                 <div class="attr-nav">
                     <ul>
-                       
-                        <li >
-                            
-                        {% if user.is_authenticated %} 	
-                            <a href="/account/carten/?cos_id={{user.id}}">
-								<i class="fa fa-shopping-bag"></i>
-                                My Cart
-								<span class="badge">{{count}}</span>
-								
-							</a>
-                        {% endif %}
-						</li>
+                        <li class="search"><a href="#"><i class="fa fa-search"></i></a></li>
+                        <li class="side-menu"><a href="#">
+						<i class="fa fa-shopping-bag"></i>
+                            <span class="badge">3</span>
+							<p>My Cart</p>
+					</a></li>
                     </ul>
                 </div>
-                <!-- End Cart-->
+                <!-- End Atribute Navigation -->
             </div>
             <!-- Start Side Menu -->
             <div class="side">
@@ -194,7 +173,7 @@
                             <p>1x - <span class="price">$40.00</span></p>
                         </li>
                         <li class="total">
-                            <a href="{% url 'carten' %}" class="btn btn-default hvr-hover btn-cart">VIEW CART</a>
+                            <a href="#" class="btn btn-default hvr-hover btn-cart">VIEW CART</a>
                             <span class="float-right"><strong>Total</strong>: $180.00</span>
                         </li>
                     </ul>
@@ -223,10 +202,10 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
-                    <h2>Shop Detail</h2>
+                    <h2>Checkout</h2>
                     <ul class="breadcrumb">
                         <li class="breadcrumb-item"><a href="#">Shop</a></li>
-                        <li class="breadcrumb-item active">Shop Detail </li>
+                        <li class="breadcrumb-item active">Checkout</li>
                     </ul>
                 </div>
             </div>
@@ -234,184 +213,107 @@
     </div>
     <!-- End All Title Box -->
 
-    <!-- Start Shop Detail  -->
-    <div class="shop-detail-box-main">
+    <!-- Start Cart  -->
+    <div class="cart-box-main">
         <div class="container">
+            
             <div class="row">
-                <div class="col-xl-5 col-lg-5 col-md-6">
-                    <div id="carousel-example-1" class="single-product-slider carousel slide" data-ride="carousel">
-                        <div class="carousel-inner" role="listbox" >
-                            <div class="carousel-item active" > <img class="d-block w-100" src="{{obj.img.url}}" alt="First slide" > </div>
-                            <div class="carousel-item"> <img class="d-block w-100" src="{{obj.img2.url}}" alt="Second slide"> </div>
-                            <div class="carousel-item"> <img class="d-block w-100" src="{{obj.img3.url}}" alt="Third slide"> </div>
+                <div class="col-sm-6 col-lg-6 mb-3">
+                    <div class="checkout-address">
+                        <div class="title-left">
+                            <h3>CREATE NEW BILLING ADDRESS</h3>
                         </div>
-                        <a class="carousel-control-prev" href="#carousel-example-1" role="button" data-slide="prev"> 
-						<i class="fa fa-angle-left" aria-hidden="true"></i>
-						<span class="sr-only">Previous</span> 
-					</a>
-                        <a class="carousel-control-next" href="#carousel-example-1" role="button" data-slide="next"> 
-						<i class="fa fa-angle-right" aria-hidden="true"></i> 
-						<span class="sr-only">Next</span> 
-					</a>
-                    
-                        <ol class="carousel-indicators" style="background-color: aliceblue;">
-                            {% if obj.img.url != "" %}
-                            <li data-target="#carousel-example-1" data-slide-to="0" class="active">
-                                <img class="d-block w-100 img-fluid" src="{{obj.img.url}}" alt="" />
-                            </li>
-                            {% endif%}
-                            {% if obj.img2.url != "" %}
-                            <li data-target="#carousel-example-1" data-slide-to="1">
-                                <img class="d-block w-100 img-fluid" src="{{obj.img2.url}}" alt="" />
-                            </li>
-                            {% endif%}
-                            {% if obj.img3.url != "" %}
-                            <li data-target="#carousel-example-1" data-slide-to="2">
-                                <img class="d-block w-100 img-fluid" src="{{obj.img3.url}}" alt="" />
-                            </li>
-                            {% endif%}
-                        </ol>
-                    </div>
-                </div>
-                <div class="col-xl-7 col-lg-7 col-md-6">
-                    <div class="single-product-details">
-                        <h2>{{obj.name}}</h2>
-
-                        <h5> <del>₹ {{ obj.droup }}</del> ₹{{obj.net_price}}</h5>
-                        <p class="available-stock"><span> {{obj.quanty}} .Kg Available Now 
-						<h4>Short Description:</h4>
-						<p>{{obj.des}} </p>
-						<ul>
-							<li>
-								<div class="form-group quantity-box">
-									<label class="control-label">Quantity</label>
-                                    <form action="{% url 'checkout' %}" name="buyfun">
-									<input class="form-control" value="1" min="1" max="50" type="number" name="qty"><B>.Kg</B>
-                                    <input type="hidden" name= costa value="{{user.id}}">
-                                    <input type="hidden" name="froot" value="{{obj.id}}">
-                                    <input type="hidden" name="typin"  value="{{typ}}">
-                                    </form>
-								</div>
-							</li>
-						</ul>
-
-						<div class="price-box-bar">
-							<div class="cart-and-bay-btn">
-                                
-								<a class="btn hvr-hover" data-fancybox-close="" href="{% url 'bil_address' user.id %}">Buy Now</a>
-                                
-                                {% if user.is_authenticated %}     
-								<a class="btn hvr-hover" data-fancybox-close="" onclick="document.cart.submit()">Add to cart</a>
-
-                                {% endif %}
-                                </form>
-							</div>
-						</div>
-
-						<div class="add-to-btn">
-							
-							<div class="share-bar">
-								<a class="btn hvr-hover" href="#"><i class="fab fa-facebook" aria-hidden="true"></i></a>
-								<a class="btn hvr-hover" href="#"><i class="fab fa-google-plus" aria-hidden="true"></i></a>
-								<a class="btn hvr-hover" href="#"><i class="fab fa-twitter" aria-hidden="true"></i></a>
-								<a class="btn hvr-hover" href="#"><i class="fab fa-pinterest-p" aria-hidden="true"></i></a>
-								<a class="btn hvr-hover" href="#"><i class="fab fa-whatsapp" aria-hidden="true"></i></a>
-							</div>
-						</div>
-                    </div>
-                </div>
-            </div>
-			
-			<div class="row my-5">
-				<div class="card card-outline-secondary my-4" style="height:500px; width:100%">
-					<div class="card-header">
-						<h2>Product Reviews</h2>
-					</div>
-					<div class="card-body" style="overflow-x: hidden; overflow-y:scroll;">
-                        {% for rev1 in rev %}
-						<div class="media mb-3">
-							<div class="mr-2">
-                                
-                                
-								<div id="iconlet">{{rev1.costamor_nam.0}}</div>
-                                
-							</div>
-							<div class="media-body">
-								<p>{{rev1.review}}.</p>
-                                &nbsp;&nbsp;
-                                <small class="text-muted"> <b>{{rev1.costamor_nam}}.</b></small>&nbsp;&nbsp;
-								<small class="text-muted">Posted on date {{rev1.review_date}}</small>
-							</div>
-						</div>
-						<hr>
-                        {% endfor %}
-                    </div>
-                    {% if user.is_authenticated %}
-                    <form action="review/" method="POST" autocomplete="off">
-                        {% csrf_token %}
-                    <div class="card-header" style="display: flex;">
-                        
-                        <input type="hidden" name="cos_name" value="{{user.user_name}}">
-						<input type="hidden" name="product" value="{{obj.id}}">
-                        <input class="form-control" style="width: 70%; margin:10px;" name="review">
-                        
-                    <div><button type="submit" style="height: 65%;width:65%; position:relative; bottom:-10px; padding:0mm">
-                        <img src="{% static 'images/icon-send2.png' %}" style="height: 100%;width:100%;"></button></div>
-                    
-                    </div>
-                    </form>
-                    {% endif %}
-
-                     <!--  icon for the review... -->
-
-                    
-
-					</div>
-                    
-				  </div>
-			</div>
-
-            <div class="row my-5">
-                <div class="col-lg-12">
-                    <div class="title-all text-center">
-                        <h1>Featured Products</h1>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sit amet lacus enim.</p>
-                    </div>
-                    <div class="featured-products-box owl-carousel owl-theme">
-                       {% for fod in food %}
-                        <div class="item">
-                            <div class="products-single fix">
-                                <div class="box-img-hover">
-                                    <div class="type-lb">
-                                       
-                                    </div>
-                                    <img src="{{fod.img.url}}" class="img-fluid" alt="Image">
-                                    <div class="mask-icon">
-                                        <ul>
-                                            
-                                            <li><a href="#" data-toggle="tooltip" data-placement="right" title="Add To Cart"><i class="fa fa-shopping-bag"></i></a></li>
-                                            <li><a href="#" data-toggle="tooltip" data-placement="right" title="Add to Wishlist"><i class="far fa-heart"></i></a></li>
-                                        </ul>
-                                        <form action="">
-                                        <button type="submit"  href="#" name="product" value="{{fod.id}}" style="border: 5px;; background-color: #b0b435; font-weight:bold; color:white;">
-                                            VIEW PRODUCT  
-                                        </button>
-                                    </form>
-                                    </div>
+                        <form class="needs-validation" action="{% url 'editaddress' bill.id %}" method="POST">
+                            {% csrf_token %}
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label for="firstName">First name *</label>
+                                    <input type="text" class="form-control" id="bill1"  required name="firstname" value="{{bill.first_name}}">
+                                    <div class="invalid-feedback"> Valid first name is required. </div>
                                 </div>
-                                <div class="why-text">
-                                    <h4>{{fod.name}}</h4>
-                                    
-                                    <h5> ₹{{fod.net_price}}</h5>
-                                    
+                                <div class="col-md-6 mb-3">
+                                    <label for="lastName">Last name *</label>
+                                    <input type="text" class="form-control" id="bill2" name="lastname" required value="{{bill.last_name}}">
+                                    <div class="invalid-feedback"> Valid last name is required. </div>
                                 </div>
                             </div>
-                        </div>
-                        {% endfor %}
-                      >
+                           
+                           
+                            <div class="mb-3">
+                                <label for="address">Address *</label>
+                                <input type="text" class="form-control" id="bill5" name="address1" required value="{{bill.address1}}">
+                                <div class="invalid-feedback"> Please enter your shipping address. </div>
+                            </div>
+                            <div class="mb-3">
+                                <label for="address2">Address 2 </label>
+                                <input type="text" class="form-control" id="address2" name="address2" value="{{bill.address2}}"> </div>
+
+                            <div class="mb-3">
+                                    <label for="address2">phone-no : *</label>
+                                    <input type="text" class="form-control" id="bill6" name="phone1" required value="{{bill.phone_no1}}"> </div>
+                                    <div class="invalid-feedback"> Please enter your phone number </div>
+                            <div class="mb-3">
+                                        <label for="address2"> Secound phone-no: </label>
+                                        <input type="text" class="form-control" id="phone2" name="phone2" value="{{bill.phone_no2}}"> </div>            
+                            <div class="row">
+                                
+                                <div class="col-md-5 mb-3">
+                                    <label for="country">Country *</label>
+                                    <select class="wide w-100" name="country" id="bill7" size="1" required >
+									
+									<option value="{{bill.contry}}" selected="selected">Select Country </option>
+								</select>
+                                    <div class="invalid-feedback"> Please select a valid country. </div>
+                                </div>
+                                <div class="col-md-4 mb-3">
+                                    <label for="state">State *</label>
+                                    <select class="wide w-100" name="state" id="bill8" size="1" required>
+                                    <option value="{{bill.state}}" selected="selected">select Country </option>
+									 
+								</select>
+                                    <div class="invalid-feedback"> Please provide a valid state. </div>
+                                </div>
+
+                                <div class="col-md-4 mb-3">
+                                    <label for="state">district *</label>
+                                    <select class="wide w-100" name="district" id="bill9" size="1" required>
+                                    <option value="{{bill.district}}" selected="selected">select your district </option>
+									
+								</select>
+                                    <div class="invalid-feedback"> Please provide a valid state. </div>
+                                </div>
+                               
+                                <div class="col-md-3 mb-3">
+                                    <label for="zip">picode *</label>
+                                    <input type="number" class="form-control" id="bill10" name="pin" required value="{{bill.pincode}}">
+                                    <div class="invalid-feedback"> pincode code required. </div>
+                                </div>
+                                <input type="hidden" value="{{bill.user_id}}" name="user">
+                                
+                                <div class="col-md-3 mb-3">
+                                <br><br><br>
+                                <button class="ml-auto btn hvr-hover" style="color: white; border-radius: 10px;" id="create_button" >Edit Address</button>
+                                </div>
+                                </div>
+                            
+                             </form>
+                            </div>
+                             
+                            
+                            
+
+
+
+                            <!-- thr card payment -->
+
+
+                            
+                           
+                          
+                        
                     </div>
                 </div>
-            </div>
+              
 
         </div>
     </div>
@@ -604,10 +506,13 @@
     <script src="{% static 'js/popper.min.js' %}"></script>
     <script src="{% static 'js/bootstrap.min.js' %}"></script>
     <!-- ALL PLUGINS -->
+
+    
+  
     <script src="{% static 'js/jquery.superslides.min.js' %}"></script>
     <script src="{% static 'js/bootstrap-select.js' %}"></script>
     <script src="{% static 'js/inewsticker.js' %}"></script>
-    <script src="{% static 'js/bootsnav.js' %}"></script>
+    <script src="{% static 'js/bootsnav.js.' %}"></script>
     <script src="{% static 'js/images-loded.min.js' %}"></script>
     <script src="{% static 'js/isotope.min.js' %}"></script>
     <script src="{% static 'js/owl.carousel.min.js' %}"></script>
@@ -615,6 +520,60 @@
     <script src="{% static 'js/form-validator.min.js' %}"></script>
     <script src="{% static 'js/contact-form-script.js' %}"></script>
     <script src="{% static 'js/custom.js' %}"></script>
+    <script>
+        var stateObject = {
+        "India": { "Delhi": ["new Delhi", "North Delhi"],
+        "Kerala": ["Alappuzha",
+        "Ernakulam",
+        "Idukki",
+        "Kannur",
+        "Kasaragod",
+        "Kollam",
+        "Kottayam",
+        "Kozhikode",
+        "Malappuram",
+        "Palakkad",
+        "Pathanamthitta",
+        "Thiruvananthapuram",
+        "Thrissur",
+        "Wayanad",
+        ],
+        "Goa": ["North Goa", "South Goa"],
+        },
+        "Australia": {
+        "South Australia": ["Dunstan", "Mitchell"],
+        "Victoria": ["Altona", "Euroa"]
+        }, "Canada": {
+        "Alberta": ["Acadia", "Bighorn"],
+        "Columbia": ["Washington", ""]
+        },
+        }
+        window.onload = function () {
+        var countySel = document.getElementById("bill7"),
+        stateSel = document.getElementById("bill8"),
+        districtSel = document.getElementById("bill9");
+        for (var country in stateObject) {
+        countySel.options[countySel.options.length] = new Option(country, country);
+        }
+        countySel.onchange = function () {
+        stateSel.length = 1; // remove all options bar first
+        districtSel.length = 1; // remove all options bar first
+        if (this.selectedIndex < 1) return; // done
+        for (var state in stateObject[this.value]) {
+        stateSel.options[stateSel.options.length] = new Option(state, state);
+        }
+        }
+        countySel.onchange(); // reset in case page is reloaded
+        stateSel.onchange = function () {
+        districtSel.length = 1; // remove all options bar first
+        if (this.selectedIndex < 1) return; // done
+        var district = stateObject[countySel.value][this.value];
+        for (var i = 0; i < district.length; i++) {
+        districtSel.options[districtSel.options.length] = new Option(district[i], district[i]);
+        }
+        }
+        }
+    </script> 
 </body>
 
 </html>
