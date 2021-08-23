@@ -26,7 +26,7 @@ def froot(request):
 
     if request.method == 'POST':
         value = request.POST['search']
-        obj = fruits.objects.get(name=value)
+        obj = fruits.objects.filter(name=value)
 
        
         return render(request, 'shop.html',{'food':obj, 'qty':count2, 'cata':cata2, 'act1':'active','typ':typ, 'count':count})
