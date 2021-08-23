@@ -223,7 +223,7 @@
                         <div class="title-left">
                             <h3>CREATE NEW BILLING ADDRESS</h3>
                         </div>
-                        <form class="needs-validation" action="{% url 'editaddress' bill.id %}" method="POST">
+                        <form class="needs-validation" action="{% url 'editaddress' bill.id user.id typ obj qty %}" method="POST">
                             {% csrf_token %}
                             <div class="row">
                                 <div class="col-md-6 mb-3">
@@ -288,7 +288,7 @@
                                     <input type="number" class="form-control" id="bill10" name="pin" required value="{{bill.pincode}}">
                                     <div class="invalid-feedback"> pincode code required. </div>
                                 </div>
-                                <input type="hidden" value="{{bill.user_id}}" name="user">
+                                <input type="hidden" value="{{user.id}}" name="user">
                                 
                                 <div class="col-md-3 mb-3">
                                 <br><br><br>

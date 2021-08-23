@@ -285,11 +285,10 @@
 							<li>
 								<div class="form-group quantity-box">
 									<label class="control-label">Quantity</label>
-                                    <form action="{% url 'checkout' %}" name="buyfun">
+                                    <form action="{% url 'getbill_address' user.id %}" name="buy">
 									<input class="form-control" value="1" min="1" max="50" type="number" name="qty"><B>.Kg</B>
-                                    <input type="hidden" name= costa value="{{user.id}}">
-                                    <input type="hidden" name="froot" value="{{obj.id}}">
-                                    <input type="hidden" name="typin"  value="{{typ}}">
+                                    <input type="hidden" name="obj" value="{{obj.id}}">
+                                    <input type="hidden" name="typ"  value="{{typ}}">
                                     </form>
 								</div>
 							</li>
@@ -298,13 +297,13 @@
 						<div class="price-box-bar">
 							<div class="cart-and-bay-btn">
                                 
-								<a class="btn hvr-hover" data-fancybox-close="" href="{% url 'bil_address' user.id %}">Buy Now</a>
+								<a class="btn hvr-hover" data-fancybox-close="" onclick="document.buy.submit()">Buy Now</a>
                                 
                                 {% if user.is_authenticated %}     
 								<a class="btn hvr-hover" data-fancybox-close="" onclick="document.cart.submit()">Add to cart</a>
 
                                 {% endif %}
-                                </form>
+                                
 							</div>
 						</div>
 

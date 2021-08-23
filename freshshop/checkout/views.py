@@ -8,59 +8,27 @@ from .import models
 # Create your views here.
 
 def checkhome(request):
-    if request.method == 'GET':
-        obj_id = request.GET['froot']
-        user_id = request.GET['costa']
-        qty = request.GET['qty']
-        if request.GET['typin'] == 'fruit':
-            obj = fruits.objects.get(id=obj_id)
-        else:
-            obj = vegitable.objects.get(id=obj_id) 
-
-        print(obj) 
-
-
-        
-        item_price = obj.price * float(qty)
-        pakking = 50
-        discount = obj.droup
-        sub_total = (item_price + pakking) - discount
-        tax = sub_total * 0.16
-        round(tax, 2)
-
-        # to remove the decimal part of total amout and it will add to item_price for taly
-
-        tax1 = int(tax + 1.00)
-
-        tax2 = float(tax1)-tax
-        print(tax1)
-        round(tax2, 2)
-        print(tax2)
-
-        total = sub_total + tax
-        
-
-        checkout = [item_price, pakking, discount, sub_total,tax, total, qty]
-
-        print (checkout)
     
-
-        
-
-
-
-
-
-    return render (request, 'checkout.html', {'checkout':checkout})
+ return render (request, 'checkout.html',)
 
 
 
 
 def order(request):
- return render(request, 'order-summery.html')   
+ return render(request, 'order-summery.html') 
+
+def getbilladdress(request,id):
+    typ = request.GET['typ']
+    obj = request.GET['obj']
+    qty = request.GET['qty']
+
+    cout = models.Checkoutaddress.objects.filter(user_id=id)
+    return render(request, 'billig-address.html',{'typ':typ, 'obj':obj,'cout':cout,'qty':qty})
 
 
-def biladdress(request,id):
+
+def biladdress(request,id,typ,obj,qty):
+
     if request.method == 'POST':
         first_name = request.POST['firstname']
         last_name = request.POST['lastname']
@@ -87,16 +55,38 @@ def biladdress(request,id):
             if phone_no2 == '':
                 phone_no2 = 0
             user_id = onlineuser.objects.get(id=id)
-            obj = models.Checkoutaddress.objects.create(email=email,user_id=user_id,first_name=first_name,last_name=last_name,address1=address1,address2=address2,contry=country,state=state,district=district,phone_no1=phone_no1,phone_no2=phone_no2,pincode=pincode)
-            obj.save();
+            obje = models.Checkoutaddress.objects.create(email=email,user_id=user_id,first_name=first_name,last_name=last_name,address1=address1,address2=address2,contry=country,state=state,district=district,phone_no1=phone_no1,phone_no2=phone_no2,pincode=pincode)
+            obje.save();
 
-        return render(request, 'checkout.html')
+
+            # if the address was created the data will got the next step checkout 
+
+            if typ == 'fruit':
+                objFW = fruits.objects.get(id=obj)
+               
+
+            if typ == 'vegita':
+                objFW = vegitable.objects.get(id=obj)    
+
+
+            priceU = objFW.price * qty
+            taxU = objFW.tax1 * qty
+            pakkingU = objFW.pakking * qty
+            after_tax = priceU + taxU + pakkingU
+            discountU = objFW.discount * qty
+            grant_total = after_tax - discountU
+
+        
+            
+            return render(request, 'checkout.html', {'typ':typ,'obj':objFW,'obja':obje,'qty':qty, 'price':priceU,'tax':taxU,'pakking':pakkingU,'aftertax':after_tax,'discount':discountU,'granttotal':grant_total})
+        cout = models.Checkoutaddress.objects.filter(user_id=id)
+        return render(request, 'billig-address.html', {'typ':typ, 'obj':obj, 'id':id, 'cout':cout,'qty':qty})
 
     else:
         cout = models.Checkoutaddress.objects.filter(user_id=id)
-        return render(request, 'billig-address.html', {'cout':cout})
+        return render(request, 'billig-address.html',{'typ':typ, 'obj':obj, 'id':id,'cout':cout,'qty':qty})
 
-def edit(request,id):
+def edit(request,id,user,typ,obj,qty):
     
     if request.method == 'POST':
         first_name = request.POST['firstname']
@@ -116,7 +106,7 @@ def edit(request,id):
             country_m = True
             msg=[state_m,district_m,country_m]
             bill = models.Checkoutaddress.objects.get(id=id)
-            return render(request, 'billig-address-edit.html', {'bill':bill})
+            return render(request, 'billig-address-edit.html', {'bill':bill,'typ':typ, 'obj':obj, 'id':user,'qty':qty})
 
 
 
@@ -126,23 +116,40 @@ def edit(request,id):
             
             models.Checkoutaddress.objects.filter(id=id).update(first_name=first_name,last_name=last_name,address1=address1,address2=address2,contry=country,state=state,district=district,phone_no1=phone_no1,phone_no2=phone_no2,pincode=pincode)
             cout = models.Checkoutaddress.objects.filter(user_id=user_id)
-            return render(request, 'billig-address.html', {'cout':cout})
+            return render(request, 'billig-address.html', {'cout':cout,'typ':typ, 'obj':obj, 'id':user,'qty':qty})
 
 
     else:
         bill = models.Checkoutaddress.objects.get(id=id)
-        return render(request, 'billig-address-edit.html', {'bill':bill})
+        return render(request, 'billig-address-edit.html', {'bill':bill,'typ':typ, 'obj':obj, 'id':user,'qty':qty})
 
 
     
-def address_remove(request,id,user):
+def address_remove(request,id,user,obj,typ,qty):
     models.Checkoutaddress.objects.get(id=id).delete()
     usr = models.onlineuser.objects.get(id=user)
     obj = models.Checkoutaddress.objects.filter(user_id=usr)
 
-    return render(request, 'billig-address.html', {'cout':obj})
+    return render(request, 'billig-address.html', {'cout':obj,'typ':typ, 'obj':obj, 'id':user,'qty':qty})
 
 
+def selectaddress(request,id,typ,obj,qty):
+    obja= models.Checkoutaddress.objects.get(id=id)
+    if typ == 'fruit':
+        objFW = fruits.objects.get(id=obj)
 
+    if typ == 'vegita':
+        objFW = vegitable.objects.get(id=obj)
 
+    priceU = objFW.price * qty
+    taxU = objFW.tax1 * qty
+    pakkingU = objFW.pakking * qty
+    after_tax = priceU + taxU + pakkingU
+    discountU = objFW.discount * qty
+    grant_total = after_tax - discountU
+     
+    print(  'the price is = ', priceU)     
+    return render(request, 'checkout.html', {'typ':typ,'obj':objFW,'obja':obja, 'qty':qty, 'price':priceU,'tax':taxU,'pakking':pakkingU,'aftertax':after_tax,'discount':discountU,'granttotal':grant_total})
+
+   
 

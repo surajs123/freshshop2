@@ -223,7 +223,7 @@
                         <div class="title-left">
                             <h3>CREATE NEW BILLING ADDRESS</h3>
                         </div>
-                        <form class="needs-validation" action="{% url 'bil_address' user.id %}" method="POST">
+                        <form class="needs-validation" action="{% url 'bil_address' user.id typ obj qty %}" method="POST">
                             {% csrf_token %}
                             <div class="row">
                                 <div class="col-md-6 mb-3">
@@ -288,10 +288,10 @@
                                     <input type="number" class="form-control" id="bill10" name="pin" required>
                                     <div class="invalid-feedback"> pincode code required. </div>
                                 </div>
-                                <input type="hidden" name="email" value="{{user.email }}">
+                                <input type="hidden" name="email" value="{{user.email}}">
                                 <div class="col-md-3 mb-3">
                                 <br><br><br>
-                                <button class="ml-auto btn hvr-hover" style="color: white; border-radius: 10px;" id="create_button" onsubmit="submit()">Use New Address</button>
+                                <button class="ml-auto btn hvr-hover" style="color: white; border-radius: 10px;" id="create_button" >Use New Address</button>
                                 </div>
                                 </div>
                             
@@ -326,7 +326,8 @@
                                 <div style="overflow-x: hidden; overflow-y:scroll;height:500px;">
                                 {% for count in cout %}
                                 <div style="line-height: 95%;background: rgba(197, 192, 192, 0.356); padding:10px" >
-                                    <input type="checkbox"   id="check{{forloop.counter}}"  onchange="checkfun({{forloop.counter}})" style="height:20px;width:20px;"> 
+                                    <form action="{% url 'bilselect' count.id typ obj qty %}" name="select">
+                                    <input type="checkbox"   id="check{{forloop.counter}}"  onchange="submit()" style="height:20px; width:20px;"> 
                                     &nbsp;<small>select this address </small><br><BR>
                                     <b>{{count.first_name}} {{count.last_name}}</b><br><BR>
                                     <label>{{count.address1}} </label><br>
@@ -334,16 +335,17 @@
                                     <label>{{count.district}}</label><br>
                                     <label>{{count.contry}}</label><br>
                                     <label>ph: {{count.phone_no1}} </label><br>
-                                    <a class="ml-auto btn hvr-hover" href="{% url 'editaddress' count.id %}" style="border-radius: 10px; background:white; border:3px solid grey;">Edit</a> &nbsp;&nbsp;&nbsp;
-                                    <a class="ml-auto btn hvr-hover" href="{% url 'removeaddress' count.id user.id%}" style=" border-radius: 10px; background:white; border:3px solid grey;">Remove</a>
+                                    <a class="ml-auto btn hvr-hover" href="{% url 'editaddress' count.id user.id typ obj qty %}" style="border-radius: 10px; background:white; border:3px solid grey;">Edit</a> &nbsp;&nbsp;&nbsp;
+                                    <a class="ml-auto btn hvr-hover" href="{% url 'removeaddress' count.id user.id typ obj qty %}" style=" border-radius: 10px; background:white; border:3px solid grey;">Remove</a>
                                     <hr>
-                                    
+                                    </form>
                                 </div>
                                 {% endfor %}
-
+                                The id is:<p id="valu"></p>
                                </div> 
                                <hr>
                                <div class="col-md-3 mb-3">
+
                                 <button class="ml-auto btn hvr-hover" style="color: white; border-radius: 10px; background:grey" id="select_button" disabled>Use Selected Address</button>
                                 </div>
                                 
@@ -545,9 +547,10 @@
     <script src="{% static 'js/bootstrap.min.js' %}"></script>
     <!-- ALL PLUGINS -->
     <script>
-        function checkfun(val){
+        function Checkfun(val){
+            document.getElementById(valu).value=val;
             var i;
-            for (i=1;i<5;i++){
+            for (i=1;i<3;i++){
                 if (i==val){
                     continue;
                 }
@@ -556,7 +559,7 @@
             
             
             }
-            var con = document.getElementById('check'+val)
+            var con = document.getElementById('check'+val);
             if (con.checked){
                 document.getElementById("create_button").disabled=true;
                 document.getElementById("select_button").disabled=false;
@@ -571,11 +574,7 @@
         }
 
     </script>
-    <script>
-        if ({{msg.district_m}} == true){
-            alert("pleses enter this");
-        }
-    </script>
+    
   
     <script src="{% static 'js/jquery.superslides.min.js' %}"></script>
     <script src="{% static 'js/bootstrap-select.js' %}"></script>
