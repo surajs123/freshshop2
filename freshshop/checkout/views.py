@@ -17,7 +17,8 @@ def checkhome(request):
 def order(request):
  return render(request, 'order-summery.html') 
 
-def getbilladdress(request,id):
+def getbilladdress(request):
+    id = request.GET['user']
     typ = request.GET['typ']
     obj = request.GET['obj']
     qty = request.GET['qty']
@@ -27,9 +28,12 @@ def getbilladdress(request,id):
 
 
 
-def biladdress(request,id,typ,obj,qty):
+def biladdress(request,typ):
 
     if request.method == 'POST':
+        id = request.POST['user']
+        obj = request.POST['obj']
+        qty = request.POST['qty']
         first_name = request.POST['firstname']
         last_name = request.POST['lastname']
         address1 = request.POST['address1']
@@ -86,9 +90,13 @@ def biladdress(request,id,typ,obj,qty):
         cout = models.Checkoutaddress.objects.filter(user_id=id)
         return render(request, 'billig-address.html',{'typ':typ, 'obj':obj, 'id':id,'cout':cout,'qty':qty})
 
-def edit(request,id,user,typ,obj,qty):
+def edit(request,typ):
     
     if request.method == 'POST':
+        id = request.POST['id']
+        user = request.POST['user']
+        obj = request.POST['obj']
+        qty = request.POST['qty']
         first_name = request.POST['firstname']
         last_name = request.POST['lastname']
         address1 = request.POST['address1']
@@ -120,12 +128,21 @@ def edit(request,id,user,typ,obj,qty):
 
 
     else:
+        id = request.GET['id']
+        user = request.GET['user']
+        obj = request.GET['obj']
+        qty = request.GET['qty']
         bill = models.Checkoutaddress.objects.get(id=id)
         return render(request, 'billig-address-edit.html', {'bill':bill,'typ':typ, 'obj':obj, 'id':user,'qty':qty})
 
 
     
-def address_remove(request,id,user,obj,typ,qty):
+def address_remove(request,typ):
+    id = request.GET['id']
+    user = request.GET['user']
+    obj = request.GET['obj']
+    qty = request.GET['qty']
+
     models.Checkoutaddress.objects.get(id=id).delete()
     usr = models.onlineuser.objects.get(id=user)
     obj = models.Checkoutaddress.objects.filter(user_id=usr)
@@ -133,20 +150,26 @@ def address_remove(request,id,user,obj,typ,qty):
     return render(request, 'billig-address.html', {'cout':obj,'typ':typ, 'obj':obj, 'id':user,'qty':qty})
 
 
-def selectaddress(request,id,typ,obj,qty):
+def selectaddress(request,typ):
+    id = request.GET['id']
+    obj = request.GET['obj']
+    qty = request.GET['qty']
+    
     obja= models.Checkoutaddress.objects.get(id=id)
     if typ == 'fruit':
         objFW = fruits.objects.get(id=obj)
 
     if typ == 'vegita':
         objFW = vegitable.objects.get(id=obj)
-
+    qty= int(qty)
     priceU = objFW.price * qty
     taxU = objFW.tax1 * qty
+    taxU = round (taxU, 2)
     pakkingU = objFW.pakking * qty
     after_tax = priceU + taxU + pakkingU
     discountU = objFW.discount * qty
     grant_total = after_tax - discountU
+    grant_total = round(grant_total, 2)
      
     print(  'the price is = ', priceU)     
     return render(request, 'checkout.html', {'typ':typ,'obj':objFW,'obja':obja, 'qty':qty, 'price':priceU,'tax':taxU,'pakking':pakkingU,'aftertax':after_tax,'discount':discountU,'granttotal':grant_total})

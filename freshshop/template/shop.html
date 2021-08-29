@@ -308,6 +308,10 @@
                                                             </form>
                                                             
                                                         </ul>
+
+                                                        <!-- product detsils showing button -->
+                                                        {% if user.is_authenticated %}
+
                                                         <form action="detail/">
                                                           
                                                         <button type="submit"   name="product" value="{{furt.id}}" class="icon_bag">
@@ -315,7 +319,20 @@
                                                         </button>
                                                         
                                                         
-                                                    </form>
+                                                        </form>
+                                                        {% else %}
+                                                        <form action="">
+                                                          
+                                                            <button onclick="useralert()" class="icon_bag">
+                                                                VIEW PRODUCT  
+                                                            </button>
+                                                            
+                                                            
+                                                            </form>
+                                                        
+
+                                                        {% endif %}
+                                                        <!-- the button end -->
                                                     </div>
                                                 </div>
                                                 <div class="why-text">
@@ -356,10 +373,19 @@
                                     <div class="collapse show" id="sub-men1" data-parent="#list-group-men">
                                         <div class="list-group">
                                         {% for froot in food %}
+                                        {% if user.is_authenticated %}
                                         <form action="detail/">
                                             
                                             <button type="submit" name="product" value= "{{froot.id}}" class="list-group-item list-group-item-action " >{{froot.name}} <small class="text-muted">{{froot.quanty}} Kg</small></button>
-                                        </form>    
+                                        </form> 
+                                        
+                                        {% else %}
+
+                                        <form action="#">
+                                            
+                                            <button  name="product" onclick="useralert()" class="list-group-item list-group-item-action " >{{froot.name}} <small class="text-muted">{{froot.quanty}} Kg</small></button>
+                                        </form>
+                                        {% endif %}
                                         {% endfor %}   
                                         </div>
                                     </div>
@@ -598,6 +624,14 @@
             source: '{% url 'autocompleteV' %}'
           });
         } );
+    </script>
+    <script>
+        function useralert(){
+            alert(
+                "Pleases login for see the product details or buy this product "
+            );
+        }
+        
     </script>
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>

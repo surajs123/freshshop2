@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'vegetable',
     'fruit',
     'checkout',
+    'home',
 ]
 
 MIDDLEWARE = [

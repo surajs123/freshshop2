@@ -285,10 +285,11 @@
 							<li>
 								<div class="form-group quantity-box">
 									<label class="control-label">Quantity</label>
-                                    <form action="{% url 'getbill_address' user.id %}" name="buy">
+                                    <form action="{% url 'getbill_address' %}" name="buy">
 									<input class="form-control" value="1" min="1" max="50" type="number" name="qty"><B>.Kg</B>
                                     <input type="hidden" name="obj" value="{{obj.id}}">
                                     <input type="hidden" name="typ"  value="{{typ}}">
+                                    <input type="hidden" name="user" value="{{user.id}}">
                                     </form>
 								</div>
 							</li>

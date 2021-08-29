@@ -6,11 +6,12 @@ from custamor.models import onlineuser, CartModelFruite, CartModelvegitable
 from fruit.models import fruits
 from django.contrib import messages
 from vegetable.models import vegitable
-
+from .import models
 # Create your views here.
 
 def index(request):
     # this will count the number of cart in user saved
+    
     count= 0
     if request.user.is_authenticated:
         login_user= request.user
@@ -18,36 +19,14 @@ def index(request):
         count1 = CartModelFruite.objects.filter(costamor=user_now).count()
         count2 = CartModelvegitable.objects.filter(costamor=user_now).count()
         count = count1+count2 
-
-    return render (request, 'index.html',{'count':count} )
-
-
-
-def check (request):
-    return render(request, 'checkout.html') 
-
-def autocom(request):
-    if 'term' in request.GET:
-        nam = request.GET['term']
-        print(nam)
-        qs1 = fruits.objects.filter(Q(name__istartswith=nam))
-        qs2 = vegitable.objects.filter(Q(name__istartswith=nam))
-        print(qs1)
-        name1 = list()
-        name2 = list()
-        namet = list()
-        for fruit in qs1:
-            name1.append(fruit.name)
-            print(name1)
-        for fruit in qs2:
-            name2.append(fruit.name)
-            print(name2) 
-
-        namet = name1+name2       
-        return JsonResponse(namet, safe=False) 
         
+    offers = models.TitleOffer.objects.all()
+    blogs = models.Blog.objects.all()
+    advertise = models.Advertise.objects.all()
+    return render (request, 'index.html',{'count':count, 'offers':offers,'blogs':blogs,'advertise':advertise} )
 
-    return render(request, 'index.html')
+
+
          
 
 

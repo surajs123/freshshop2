@@ -49,7 +49,6 @@ def regist(request):
                     
                     
             else:
-                data=dict()
                 messages.error(request, " The password not mach")
                 return redirect('register')
         else:
