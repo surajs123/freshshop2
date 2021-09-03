@@ -31,7 +31,8 @@ def index(request):
 
 
 
-def update_user(request,id):
+def update_user(request):
+    id= request.GET['update_id']
     
     if request.method == 'POST':
         
@@ -46,23 +47,17 @@ def update_user(request,id):
 
         
 
-        if  user_name != '':
-            
+        if  user_name == '' or pincode =='':
+            msg="Canot empty the username and pincode columns "
+            color = 'warning'
+            user = onlineuser.objects.get(id=id)
+
+            return render(request, 'register-update.html',{'userd':user,'msg':msg,'colour':color}) 
+        else:
             onlineuser.objects.filter(id=id).update(user_name=user_name,first_name=first_name, last_name=last_name,gender=gender,address=address,
             place=place,pincode=pincode, is_active=True)
 
             print('the user updated  ')
-            
-            
-            
-            
-            
-                    
-                    
-            
-        else:
-            messages.warning(request, " please fill the fields ") 
-            return redirect('updateuser')
         
         return redirect('/')      
 

@@ -1,4 +1,7 @@
 
+
+            
+            
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
@@ -105,12 +108,12 @@
                 <div class="collapse navbar-collapse" id="navbar-menu">
                     <ul class="nav navbar-nav ml-auto" data-in="fadeInDown" data-out="fadeOutUp">
                         <li class="nav-item active"><a class="nav-link" href="{% url 'index' %}">Home</a></li>
-                        <li class="nav-item"><a class="nav-link" href="about.html">About Us</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#">About Us</a></li>
                         
                         <li class="nav-item"><a href="{% url 'froot' %}" class="nav-link" >SHOP</a></li>
                         
                         
-                        <li class="nav-item"><a class="nav-link" href="contact-us.html">Contact Us</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#">Contact Us</a></li>
                         {% if user.is_authenticated %}
 
                         <li class="nav-item"><a class="nav-link" href="{% url 'logout' %}"> logout </a></li>
@@ -120,6 +123,7 @@
                         {% endif %}
                     </ul>
                 </div>
+            
                 <!-- /.navbar-collapse -->
 
                 <!-- Start cart  -->
@@ -346,7 +350,7 @@
             </div>
             <div class="item">
                 <div class="ins-inner-box">
-                    <img src="{% static 'images/instagram-img-08.jpg' }" alt="" />
+                    <img src="{% static 'images/instagram-img-08.jpg' %}" alt="" />
                     <div class="hov-in">
                         <a href="#"><i class="fab fa-instagram"></i></a>
                     </div>
@@ -483,10 +487,6 @@
     <script src="{% static 'js/form-validator.min.js' %}"></script>
     <script src="{% static 'js/contact-form-script.js' %}"></script>
     <script src="{% static 'js/custom.js' %}"></script>
-   
-    
-    
-  
 </body>
 
 </html>

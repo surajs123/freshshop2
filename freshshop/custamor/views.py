@@ -7,12 +7,20 @@ from .models import  onlineuser, CartModelFruite, CartModelvegitable
 from django.contrib import messages
 import time
 from fruit.models import fruits
+from home.models import TitleOffer
 from vegetable.models import vegitable
 # Create your views here.
 
 
 def myaccount(request):
-    return render(request, 'my-account.html')
+    if request.user.is_authenticated:
+        login_user= request.user
+        user_now= onlineuser.objects.get(id=login_user.id)
+        count1 = CartModelFruite.objects.filter(costamor=user_now).count()
+        count3 = CartModelvegitable.objects.filter(costamor=user_now).count()
+        count = count1+count3
+    offers = TitleOffer.objects.all()
+    return render(request, 'my-account.html',{'count':count,'offers':offers})
 
 def regist(request):
     
@@ -30,13 +38,16 @@ def regist(request):
 
         
 
-        if email != '' and user_name != '':
+        if email != '' and user_name != '' and pincode != '':
             
             if password==password2:
 
                 if onlineuser.objects.filter(email=email).exists():
-                    messages.warning(request,' This email was alredy Teken..')
-                    return redirect('register') 
+                    msg = " This email was alredy Teken...! "
+                    color= 'info'
+                    return render(request,'register.html',{'msg':msg,'colour':color})
+                    
+                    
                     
                    
 
@@ -44,16 +55,19 @@ def regist(request):
                     user = onlineuser.objects.create_user(email=email,user_name=user_name,first_name=first_name, last_name=last_name,gender=gender,address=address,
                     place=place,pincode=pincode,password=password, is_active=True)
                     user.save();
-                    messages.success(request, " User is Success fully Created..! ")
+                    
                     auth.login(request,user)
                     
                     
             else:
-                messages.error(request, " The password not mach")
-                return redirect('register')
+                msg = "The password is not mach..!."
+                color= 'danger'
+                return render(request,'register.html',{'msg':msg,'colour':color})
         else:
-            messages.warning(request, " please fill the fields ") 
-            return redirect('register')
+            msg = "Please fill the fields Email, Username and Pincode....! "
+            color= 'warning'
+            
+            return render ('register.html',{'msg':msg,'colour':color})
         
         return redirect('/')      
 
@@ -73,7 +87,9 @@ def logina(request):
             return redirect("/")
 
         else:
-            return render(request, 'login.html')
+            msg= "Incorrect Email and Password...!"
+            color= 'danger'
+            return render(request, 'login.html',{'msg':msg,'colour':color})
     
 
 
