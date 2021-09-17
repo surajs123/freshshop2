@@ -6,6 +6,7 @@ from django.shortcuts import render, redirect
 from .models import fruits, frureview
 from django.contrib.auth import authenticate
 from django.contrib import messages
+from home.models import TitleOffer
 from custamor.models import onlineuser, CartModelFruite, CartModelvegitable
 # Create your views here.
 qtyf = fruits.objects.all()
@@ -14,25 +15,46 @@ cata2 = ' FRUITS '
 for totf in qtyf:
     count2 =count2+totf.quanty
 typ = 'fruit'
+
+
+
 def froot(request):
+    offers = TitleOffer.objects.all()
+    # this will count the number of cart in user saved
+    count= 0
+    if request.user.is_authenticated:
+        login_user= request.user
+        user_now= onlineuser.objects.get(id=login_user.id)
+        count1 = CartModelFruite.objects.filter(costamor=user_now).count()
+        count3 = CartModelvegitable.objects.filter(costamor=user_now).count()
+        count = count1+count3
 
     if request.method == 'POST':
         value = request.POST['search']
-        obj = fruits.objects.get(name=value)
+        obj = fruits.objects.filter(name=value)
 
        
-        return render(request, 'shop.html',{'food':obj, 'qty':count2, 'cata':cata2, 'act1':'active','typ':typ})
+        return render(request, 'shop.html',{'food':obj, 'qty':count2, 'cata':cata2, 'act1':'active','typ':typ, 'count':count, 'offers':offers})
 
     else:
         food = fruits.objects.all()
-        return render(request, 'shop.html',{'food':food, 'qty':count2, 'cata':cata2, 'act1':'active','typ':typ})
+        return render(request, 'shop.html',{'food':food, 'qty':count2, 'cata':cata2, 'act1':'active','typ':typ,'count':count,'num':1, 'offers':offers})
 
 def fdetail(request):
+    # this will count the number of cart in user saved
+    count= 0
+    if request.user.is_authenticated:
+        login_user= request.user
+        user_now= onlineuser.objects.get(id=login_user.id)
+        count1 = CartModelFruite.objects.filter(costamor=user_now).count()
+        count3 = CartModelvegitable.objects.filter(costamor=user_now).count()
+        count = count1+count3
     
     val = request.GET['product']
     obj = fruits.objects.get(id=val)
     rev = frureview.objects.filter(product_id=obj)
     food2 = fruits.objects.all()
+    offers = TitleOffer.objects.all()
     
     # this will find the actual price for the product 
     
@@ -40,7 +62,7 @@ def fdetail(request):
     
     
 
-    return render(request, 'shop-detail.html',{'obj':obj,'food':food2, 'rev':rev,'typ':typ,})
+    return render(request, 'shop-detail.html',{'obj':obj,'food':food2, 'rev':rev,'typ':typ,'count':count, 'offers':offers})
 
     
     

@@ -27,11 +27,17 @@ class vegitable(models.Model):
         price = (self.price - self.discount) + tax + self.pakking
         return price
 
+    # this for checkout the value without discount named as droup
+
     @property
     def droup(self):
-        tax =  self.price * (self.tax /100)  
-        droup = self.price + tax + self.pakking 
+        droup = self.net_price + self.discount
         return droup
+
+    @property
+    def tax1(self):
+        tax = self.price*(self.tax/100)
+        return tax
 
     def __str__(self):
         return self.name

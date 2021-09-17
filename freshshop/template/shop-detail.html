@@ -53,120 +53,104 @@
 </head>
 
 <body>
-    <!-- Start Main Top -->
-    <div class="main-top">
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-					<div class="custom-select-box">
-                        <select id="basic" class="selectpicker show-tick form-control" data-placeholder="$ USD">
-							<option>¥ JPY</option>
-							<option>$ USD</option>
-							<option>€ EUR</option>
-						</select>
-                    </div>
-                    <div class="right-phone-box">
-                        <p>Call US :- <a href="#"> +11 900 800 100</a></p>
-                    </div>
-                    <div class="our-link">
-                        <ul>
-                            <li><a href="#"><i class="fa fa-user s_color"></i> My Account</a></li>
-                            <li><a href="#"><i class="fas fa-location-arrow"></i> Our location</a></li>
-                            <li><a href="#"><i class="fas fa-headset"></i> Contact Us</a></li>
-                        </ul>
-                    </div>
+<!-- Start Main Top -->
+<div class="main-top">
+        
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                
+                <div class="right-phone-box">
+                    <p>Call US :- <a href="#"> +11 900 800 100</a></p>
                 </div>
-                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-					<div class="login-box">
-						<select id="basic" class="selectpicker show-tick form-control" data-placeholder="Sign In">
-							<option>Register Here</option>
-							<option>Sign In</option>
-						</select>
-					</div>
-                    <div class="text-slid-box">
-                        <div id="offer-box" class="carouselTicker">
-                            <ul class="offer-box">
-                                <li>
-                                    <i class="fab fa-opencart"></i> 20% off Entire Purchase Promo code: offT80
-                                </li>
-                                <li>
-                                    <i class="fab fa-opencart"></i> 50% - 80% off on Vegetables
-                                </li>
-                                <li>
-                                    <i class="fab fa-opencart"></i> Off 10%! Shop Vegetables
-                                </li>
-                                <li>
-                                    <i class="fab fa-opencart"></i> Off 50%! Shop Now
-                                </li>
-                                <li>
-                                    <i class="fab fa-opencart"></i> Off 10%! Shop Vegetables
-                                </li>
-                                <li>
-                                    <i class="fab fa-opencart"></i> 50% - 80% off on Vegetables
-                                </li>
-                                <li>
-                                    <i class="fab fa-opencart"></i> 20% off Entire Purchase Promo code: offT30
-                                </li>
-                                <li>
-                                    <i class="fab fa-opencart"></i> Off 50%! Shop Now 
-                                </li>
-                            </ul>
-                        </div>
+                <div class="our-link">
+                    <ul>
+                        {% if user.is_authenticated %}
+
+                        <li><a href="{% url 'account' %}"><i class="fa fa-user s_color"></i>  &nbsp;&nbsp;{{user.user_name}}</a></li>
+
+                        {% else %}
+                        <li><a href="#"><i class="fa fa-user s_color"></i> My Account</a></li>
+
+                        {% endif %}
+                        <li><a href="#"><i class="fas fa-location-arrow"></i> Our location</a></li>
+                        <li><a href="#"><i class="fas fa-headset"></i> Contact Us</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                
+                <div class="text-slid-box">
+                    <div id="offer-box" class="carouselTicker">
+                        <ul class="offer-box">
+                            {% for offer in offers %}
+                            <li>
+                                <i class="fab fa-opencart"></i> {{offer.offer}}
+                            </li>
+                            {% endfor %}
+                        </ul>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <!-- End Main Top -->
+</div>
+<!-- End Main Top -->
 
-    <!-- Start Main Top -->
-    <header class="main-header">
-        <!-- Start Navigation -->
-        <nav class="navbar navbar-expand-lg navbar-light bg-light navbar-default bootsnav">
-            <div class="container">
-                <!-- Start Header Navigation -->
-                <div class="navbar-header">
-                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-menu" aria-controls="navbars-rs-food" aria-expanded="false" aria-label="Toggle navigation">
-                    <i class="fa fa-bars"></i>
-                </button>
-                    <a class="navbar-brand" href="index.html"><img src="images/logo.png" class="logo" alt=""></a>
-                </div>
-                <!-- End Header Navigation -->
+<!-- Start Main Top -->
+<header class="main-header">
+    
+    <!-- Start Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light navbar-default bootsnav">
+        <div class="container">
+            <!-- Start Header Navigation -->
+            <div class="navbar-header">
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-menu" aria-controls="navbars-rs-food" aria-expanded="false" aria-label="Toggle navigation">
+                <i class="fa fa-bars"></i>
+            </button>
+                <a class="navbar-brand" href="index.html"><img src="{% static 'images/logo.png' %}" class="logo" alt=""></a>
+            </div>
+            <!-- End Header Navigation -->
 
-                <!-- Collect the nav links, forms, and other content for toggling -->
-                <div class="collapse navbar-collapse" id="navbar-menu">
-                    <ul class="nav navbar-nav ml-auto" data-in="fadeInDown" data-out="fadeOutUp">
-                        <li class="nav-item"><a class="nav-link" href="{% url 'index' %}">Home</a></li>
-                        <li class="nav-item"><a class="nav-link" href="about.html">About Us</a></li>
-                        <li class="dropdown active">
-                            <a href="#" class="nav-link dropdown-toggle arrow" data-toggle="dropdown">SHOP</a>
-                            <ul class="dropdown-menu">
-								<li><a href="{% url 'froot' %}">Sidebar Shop</a></li>
-								
-                                
-                                <li><a href="checkout.html">Checkout</a></li>
-                                <li><a href="my-account.html">My Account</a></li>
-                                <li><a href="wishlist.html">Wishlist</a></li>
-                            </ul>
-                        </li>
-                        <li class="nav-item"><a class="nav-link" href="gallery.html">Gallery</a></li>
-                        <li class="nav-item"><a class="nav-link" href="contact-us.html">Contact Us</a></li>
-                    </ul>
-                </div>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="navbar-menu">
+                <ul class="nav navbar-nav ml-auto" data-in="fadeInDown" data-out="fadeOutUp">
+                    <li class="nav-item "><a class="nav-link" href="{% url 'index' %}">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="about.html">About Us</a></li>
+                    
+                    <li class="nav-item"><a href="{% url 'froot' %}" class="nav-link" >SHOP</a></li>
+                    
+                    
+                    <li class="nav-item"><a class="nav-link" href="contact-us.html">Contact Us</a></li>
+                    {% if user.is_authenticated %}
+
+                    <li class="nav-item"><a class="nav-link" href="{% url 'logout' %}"> logout </a></li>
+                    {% else %}
+                    <li class="nav-item"><a class="nav-link" href="{% url 'register' %}">Register</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{% url 'login' %}">Login</a></li>
+                    {% endif %}
+                </ul>
+            </div>
                 <!-- /.navbar-collapse -->
 
-                <!-- Start Atribute Navigation -->
+                <!-- Start Cart -->
                 <div class="attr-nav">
                     <ul>
-                        <li class="search"><a href="#"><i class="fa fa-search"></i></a></li>
-                        <li class="side-menu"><a href="#">
-						<i class="fa fa-shopping-bag"></i>
-                            <span class="badge">3</span>
-							<p>My Cart</p>
-					</a></li>
+                       
+                        <li >
+                            
+                        {% if user.is_authenticated %} 	
+                            <a href="/account/carten/?cos_id={{user.id}}">
+								<i class="fa fa-shopping-bag"></i>
+                                My Cart
+								<span class="badge">{{count}}</span>
+								
+							</a>
+                        {% endif %}
+						</li>
                     </ul>
                 </div>
-                <!-- End Atribute Navigation -->
+                <!-- End Cart-->
             </div>
             <!-- Start Side Menu -->
             <div class="side">
@@ -272,7 +256,7 @@
                     <div class="single-product-details">
                         <h2>{{obj.name}}</h2>
 
-                        <h5> <del>$ {{ obj.droup }}</del> ${{obj.net_price}}</h5>
+                        <h5> <del>₹ {{ obj.droup }}</del> ₹{{obj.net_price}}</h5>
                         <p class="available-stock"><span> {{obj.quanty}} .Kg Available Now 
 						<h4>Short Description:</h4>
 						<p>{{obj.des}} </p>
@@ -280,11 +264,18 @@
 							<li>
 								<div class="form-group quantity-box">
 									<label class="control-label">Quantity</label>
-                                    <form action="{% url 'checkout' %}" name="buyfun">
+                                    <form action="{% url 'getbill_address' %}" name="buy">
 									<input class="form-control" value="1" min="1" max="50" type="number" name="qty"><B>.Kg</B>
-                                    <input type="hidden" name= costa value="{{user.id}}">
-                                    <input type="hidden" name="froot" value="{{obj.id}}">
-                                    <input type="hidden" name="typin"  value="{{typ}}">
+                                    <input type="hidden" name="obj" value="{{obj.id}}">
+                                    <input type="hidden" name="typ"  value="{{typ}}">
+                                    <input type="hidden" name="user" value="{{user.id}}">
+                                    </form>
+                                    <!-- for cart working  -->
+                                    <form action="{% url 'cart' %}" name="cart" method="POST">
+                                        {% csrf_token%}
+                                        <input type="hidden" name="froot" value="{{obj.id}}">
+                                        <input type="hidden" name="typin"  value="{{typ}}">
+                                        <input type="hidden" name="costa" value="{{user.id}}">
                                     </form>
 								</div>
 							</li>
@@ -292,19 +283,14 @@
 
 						<div class="price-box-bar">
 							<div class="cart-and-bay-btn">
-                                <form action="{% url 'cart' %}" method="POST" name="cart">
-                                    {% csrf_token %}
-                                    
-                                    {% if user.is_authenticated %}
-                                    <input type="hidden" name= costa value="{{user.id}}">
-                                    <input type="hidden" name="froot" value="{{obj.id}}">
-                                    <input type="hidden" name="typin"  value="{{typ}}">
-                                    {% endif %}
-								<a class="btn hvr-hover" data-fancybox-close="" onclick="document.buyfun.submit()">Buy Now</a>
                                 
-                                    
-								<a class="btn hvr-hover" data-fancybox-close="" onclick="document.cart.submit()">Add to cart</a>
-                                </form>
+								<a class="btn hvr-hover" data-fancybox-close="" onclick="document.buy.submit()" style="color:white;">Buy Now</a>
+                                
+                                {% if user.is_authenticated %}     
+								<a class="btn hvr-hover" data-fancybox-close="" onclick="document.cart.submit()" style="color:white;">Add to cart</a>
+
+                                {% endif %}
+                                
 							</div>
 						</div>
 
@@ -402,7 +388,7 @@
                                 <div class="why-text">
                                     <h4>{{fod.name}}</h4>
                                     
-                                    <h5> ${{fod.net_price}}</h5>
+                                    <h5> ₹{{fod.net_price}}</h5>
                                     
                                 </div>
                             </div>
@@ -438,7 +424,7 @@
             </div>
             <div class="item">
                 <div class="ins-inner-box">
-                    <img src="images/instagram-img-03.jpg" alt="" />
+                    <img src="{% static 'images/instagram-img-03.jpg' %}" alt="" />
                     <div class="hov-in">
                         <a href="#"><i class="fab fa-instagram"></i></a>
                     </div>
@@ -446,7 +432,7 @@
             </div>
             <div class="item">
                 <div class="ins-inner-box">
-                    <img src="images/instagram-img-04.jpg" alt="" />
+                    <img src="{% static 'images/instagram-img-04.jpg' %}" alt="" />
                     <div class="hov-in">
                         <a href="#"><i class="fab fa-instagram"></i></a>
                     </div>
@@ -454,7 +440,7 @@
             </div>
             <div class="item">
                 <div class="ins-inner-box">
-                    <img src="images/instagram-img-05.jpg" alt="" />
+                    <img src="{% static 'images/instagram-img-05.jpg' %}" alt="" />
                     <div class="hov-in">
                         <a href="#"><i class="fab fa-instagram"></i></a>
                     </div>
@@ -462,7 +448,7 @@
             </div>
             <div class="item">
                 <div class="ins-inner-box">
-                    <img src="images/instagram-img-06.jpg" alt="" />
+                    <img src="{% static 'images/instagram-img-06.jpg' %}" alt="" />
                     <div class="hov-in">
                         <a href="#"><i class="fab fa-instagram"></i></a>
                     </div>
@@ -470,7 +456,7 @@
             </div>
             <div class="item">
                 <div class="ins-inner-box">
-                    <img src="images/instagram-img-07.jpg" alt="" />
+                    <img src="{% static 'images/instagram-img-07.jpg' %}" alt="" />
                     <div class="hov-in">
                         <a href="#"><i class="fab fa-instagram"></i></a>
                     </div>
@@ -478,7 +464,7 @@
             </div>
             <div class="item">
                 <div class="ins-inner-box">
-                    <img src="images/instagram-img-08.jpg" alt="" />
+                    <img src="{% static 'images/instagram-img-08.jpg' %}" alt="" />
                     <div class="hov-in">
                         <a href="#"><i class="fab fa-instagram"></i></a>
                     </div>
@@ -486,7 +472,7 @@
             </div>
             <div class="item">
                 <div class="ins-inner-box">
-                    <img src="images/instagram-img-09.jpg" alt="" />
+                    <img src="{% static 'images/instagram-img-09.jpg' %}" alt="" />
                     <div class="hov-in">
                         <a href="#"><i class="fab fa-instagram"></i></a>
                     </div>
@@ -494,7 +480,7 @@
             </div>
             <div class="item">
                 <div class="ins-inner-box">
-                    <img src="images/instagram-img-05.jpg" alt="" />
+                    <img src="{% static 'images/instagram-img-05.jpg' %}" alt="" />
                     <div class="hov-in">
                         <a href="#"><i class="fab fa-instagram"></i></a>
                     </div>

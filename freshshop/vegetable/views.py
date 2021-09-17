@@ -1,8 +1,16 @@
 from django.db.models.query_utils import Q
+from django.http import request
 from django.http.response import JsonResponse
 from django.shortcuts import render, redirect
 from .models import vegitable, vegreview
+from custamor.models import onlineuser, CartModelFruite, CartModelvegitable
+from home.models import TitleOffer
 # Create your views here.
+offers = TitleOffer.objects.all()
+
+
+
+
 qtyv = vegitable.objects.all()
 count1 =0
 typ = 'vegita'
@@ -11,27 +19,51 @@ for totv in qtyv:
 
 
 def vegi(request):
+    
+    if request.user.is_authenticated:
+        login_user= request.user
+        user_now= onlineuser.objects.get(id=login_user.id)
+        count3 = CartModelFruite.objects.filter(costamor=user_now).count()
+        count2 = CartModelvegitable.objects.filter(costamor=user_now).count()
+        count = count3+count2
+    # this will count the number of cart in user saved
+    count= 0
+    
     if request.method == 'POST':
         value = request.POST['search']
         obj = vegitable.objects.filter(name=value)
 
-        return render(request, 'shop.html',{'food':obj, 'qty':count1, 'cata':' VEGITABLE ', 'act2':'active', 'typ':typ})
+
+        return render(request, 'shop.html',{'food':obj, 'qty':count1, 'cata':' VEGITABLE ', 'act2':'active', 'typ':typ,'count':count,'offers':offers})
     
     else:
+        if request.user.is_authenticated:
+            login_user= request.user
+            user_now= onlineuser.objects.get(id=login_user.id)
+            count3 = CartModelFruite.objects.filter(costamor=user_now).count()
+            count2 = CartModelvegitable.objects.filter(costamor=user_now).count()
+            count = count3+count2
         food = vegitable.objects.all()
-        return render(request, 'shop.html',{'food':food, 'qty':count1, 'cata':' VEGITABLE ', 'act2':'active', 'typ':typ})
+        return render(request, 'shop.html',{'food':food, 'qty':count1, 'cata':' VEGITABLE ', 'act2':'active', 'typ':typ,'count':count,'offers':offers})
 
 def vdetail(request):
-    
+    if request.user.is_authenticated:
+        login_user= request.user
+        user_now= onlineuser.objects.get(id=login_user.id)
+        count3 = CartModelFruite.objects.filter(costamor=user_now).count()
+        count2 = CartModelvegitable.objects.filter(costamor=user_now).count()
+        count = count3+count2
+    offers = TitleOffer.objects.all()
     val = request.GET['product']
     obj = vegitable.objects.get(id=val)
     food2 = vegitable.objects.all()
     rev = vegreview.objects.filter(product_id=obj)
     produt_sum = obj.price - obj.droup
-    return render(request, 'shop-detail.html',{'obj':obj,'food':food2, 'rev':rev, 'typ':typ, 'sum':produt_sum})  
+    return render(request, 'shop-detail.html',{'obj':obj,'food':food2, 'rev':rev, 'typ':typ, 'sum':produt_sum,'count':count,'offers':offers})  
 
 
 def vegview(request):
+
     if request.method == 'POST':
         reviews = request.POST['review']
         pro_id =  request.POST['product']

@@ -23,6 +23,9 @@ class Checkoutaddress(models.Model):
     contry = models.CharField (max_length=150)
     state = models.CharField(max_length=150)
     district = models.CharField(max_length=150)
+    phone_no1 = models.BigIntegerField(null=True)
+    phone_no2 = models.BigIntegerField(null=True)
+    active = models.BooleanField(default=True)
     pincode = models.IntegerField()
 
 
@@ -30,7 +33,7 @@ class Checkoutaddress(models.Model):
 
 class Checkout(models.Model):
     
-    user_id = models.IntegerField()
+    user_id = models.BigIntegerField()
     user_name = models.CharField(max_length=100)
     date = models.DateTimeField(default=timezone.now)
     shipping_address = models.TextField(max_length=400)

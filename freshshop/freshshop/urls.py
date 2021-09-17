@@ -16,6 +16,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from fruit.admin import fruit_site
+from home.admin import home_site
 from django.conf import settings
 from vegetable.admin import vegitable_site
 from checkout.admin import checkout_site
@@ -28,6 +29,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('fruitadmin/', fruit_site.urls),
     path('vegitableadmin/', vegitable_site.urls),
+    path('homeadmin/', home_site.urls),
     path('Checkoutadmin/', checkout_site.urls),
     path('account/', include('custamor.urls')),
     path('checkout/', include('checkout.urls')),
