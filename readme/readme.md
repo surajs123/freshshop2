@@ -36,4 +36,3 @@ F:\gitshop\pyshop\freshshop\assets\images\screenshot\Screenshot (19).png">
     >postrage sql  used for the backend database for this project
 
     <img src="F:\gitshop\pyshop\freshshop\assets\images\screenshot\Screenshot (20).png">
-6. 
