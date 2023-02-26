@@ -33,19 +33,20 @@
 
     <!-- checkot div style  -->
     <style>
-        .check-box{
-            
-            
-            background:white;
+        .check-box {
+
+
+            background: white;
             margin: 7px;
             margin-right: 10px;
             border-radius: 15px;
-            border:solid 1px grey;
-            box-shadow:3px 3px 5px rgba(78, 77, 77, 0.418);
+            border: solid 1px grey;
+            box-shadow: 3px 3px 5px rgba(78, 77, 77, 0.418);
             padding: 30px;
 
         }
-        #imgcheck{
+
+        #imgcheck {
             max-width: 70px;
             max-height: 70px;
             min-width: 50px;
@@ -62,109 +63,112 @@
 </head>
 
 <body>
-  <!-- Start Main Top -->
-  <div class="main-top">
-        
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-                
-                <div class="right-phone-box">
-                    <p>Call US :- <a href="#"> +11 900 800 100</a></p>
-                </div>
-                <div class="our-link">
-                    <ul>
-                        {% if user.is_authenticated %}
+    <!-- Start Main Top -->
+    <div class="main-top">
 
-                        <li><a href="{% url 'account' %}"><i class="fa fa-user s_color"></i>  &nbsp;&nbsp;{{user.user_name}}</a></li>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
 
-                        {% else %}
-                        <li><a href="#"><i class="fa fa-user s_color"></i> My Account</a></li>
+                    <div class="right-phone-box">
+                        <p>Call US :- <a href="#"> +11 900 800 100</a></p>
+                    </div>
+                    <div class="our-link">
+                        <ul>
+                            {% if user.is_authenticated %}
 
-                        {% endif %}
-                        <li><a href="#"><i class="fas fa-location-arrow"></i> Our location</a></li>
-                        <li><a href="#"><i class="fas fa-headset"></i> Contact Us</a></li>
-                    </ul>
-                </div>
-            </div>
-            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-                
-                <div class="text-slid-box">
-                    <div id="offer-box" class="carouselTicker">
-                        <ul class="offer-box">
-                            {% for offer in offers %}
-                            <li>
-                                <i class="fab fa-opencart"></i> {{offer.offer}}
-                            </li>
-                            {% endfor %}
+                            <li><a href="{% url 'account' %}"><i class="fa fa-user s_color"></i>
+                                    &nbsp;&nbsp;{{user.user_name}}</a></li>
+
+                            {% else %}
+                            <li><a href="#"><i class="fa fa-user s_color"></i> My Account</a></li>
+
+                            {% endif %}
+                            <li><a href="#"><i class="fas fa-location-arrow"></i> Our location</a></li>
+                            <li><a href="#"><i class="fas fa-headset"></i> Contact Us</a></li>
                         </ul>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+
+                    <div class="text-slid-box">
+                        <div id="offer-box" class="carouselTicker">
+                            <ul class="offer-box">
+                                {% for offer in offers %}
+                                <li>
+                                    <i class="fab fa-opencart"></i> {{offer.offer}}
+                                </li>
+                                {% endfor %}
+                            </ul>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
-<!-- End Main Top -->
+    <!-- End Main Top -->
 
-<!-- Start Main Top -->
-<header class="main-header">
-    
-    <!-- Start Navigation -->
-    <nav class="navbar navbar-expand-lg navbar-light bg-light navbar-default bootsnav">
-        <div class="container">
-            <!-- Start Header Navigation -->
-            <div class="navbar-header">
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-menu" aria-controls="navbars-rs-food" aria-expanded="false" aria-label="Toggle navigation">
-                <i class="fa fa-bars"></i>
-            </button>
-                <a class="navbar-brand" href="index.html"><img src="{% static 'images/logo.png' %}" class="logo" alt=""></a>
+    <!-- Start Main Top -->
+    <header class="main-header">
+
+        <!-- Start Navigation -->
+        <nav class="navbar navbar-expand-lg navbar-light bg-light navbar-default bootsnav">
+            <div class="container">
+                <!-- Start Header Navigation -->
+                <div class="navbar-header">
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-menu"
+                        aria-controls="navbars-rs-food" aria-expanded="false" aria-label="Toggle navigation">
+                        <i class="fa fa-bars"></i>
+                    </button>
+                    <a class="navbar-brand" href="index.html"><img src="{% static 'images/logo2.png' %}" class="logo"
+                            alt=""></a>
+                </div>
+                <!-- End Header Navigation -->
+
+                <!-- Collect the nav links, forms, and other content for toggling -->
+                <div class="collapse navbar-collapse" id="navbar-menu">
+                    <ul class="nav navbar-nav ml-auto" data-in="fadeInDown" data-out="fadeOutUp">
+                        <li class="nav-item "><a class="nav-link" href="{% url 'index' %}">Home</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#">About Us</a></li>
+
+                        <li class="nav-item"><a href="{% url 'froot' %}" class="nav-link">SHOP</a></li>
+
+
+                        <li class="nav-item"><a class="nav-link" href="#">Contact Us</a></li>
+                        {% if user.is_authenticated %}
+
+                        <li class="nav-item"><a class="nav-link" href="{% url 'logout' %}"> logout </a></li>
+                        {% else %}
+                        <li class="nav-item"><a class="nav-link" href="{% url 'register' %}">Register</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{% url 'login' %}">Login</a></li>
+                        {% endif %}
+                    </ul>
+                </div>
+                <!-- /.navbar-collapse -->
+
+                <!-- Start Cart -->
+                <div class="attr-nav">
+                    <ul>
+
+                        <li>
+
+                            {% if user.is_authenticated %}
+                            <a href="/account/carten/?cos_id={{user.id}}">
+                                <i class="fa fa-shopping-bag"></i>
+                                My Cart
+                                <span class="badge">{{count}}</span>
+
+                            </a>
+                            {% endif %}
+                        </li>
+                    </ul>
+                </div>
+                <!-- End Cart-->
             </div>
-            <!-- End Header Navigation -->
 
-            <!-- Collect the nav links, forms, and other content for toggling -->
-            <div class="collapse navbar-collapse" id="navbar-menu">
-                <ul class="nav navbar-nav ml-auto" data-in="fadeInDown" data-out="fadeOutUp">
-                    <li class="nav-item "><a class="nav-link" href="{% url 'index' %}">Home</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#">About Us</a></li>
-                    
-                    <li class="nav-item"><a href="{% url 'froot' %}" class="nav-link" >SHOP</a></li>
-                    
-                    
-                    <li class="nav-item"><a class="nav-link" href="#">Contact Us</a></li>
-                    {% if user.is_authenticated %}
-
-                    <li class="nav-item"><a class="nav-link" href="{% url 'logout' %}"> logout </a></li>
-                    {% else %}
-                    <li class="nav-item"><a class="nav-link" href="{% url 'register' %}">Register</a></li>
-                    <li class="nav-item"><a class="nav-link" href="{% url 'login' %}">Login</a></li>
-                    {% endif %}
-                </ul>
-            </div>
-            <!-- /.navbar-collapse -->
-
-            <!-- Start Cart -->
-            <div class="attr-nav">
-                <ul>
-                   
-                    <li >
-                        
-                    {% if user.is_authenticated %} 	
-                        <a href="/account/carten/?cos_id={{user.id}}">
-                            <i class="fa fa-shopping-bag"></i>
-                            My Cart
-                            <span class="badge">{{count}}</span>
-                            
-                        </a>
-                    {% endif %}
-                    </li>
-                </ul>
-            </div>
-            <!-- End Cart-->
-        </div>
-        
-    </nav>
-    <!-- End Navigation -->
-</header>
+        </nav>
+        <!-- End Navigation -->
+    </header>
     <!-- End Main Top -->
 
     <!-- Start Top Search -->
@@ -178,8 +182,8 @@
         </div>
     </div>
     <!-- End Top Search -->
-     <!-- the popup massage  -->
-     <div class="alert alert-{{colour}}" style="text-align: center;" id="massage_top">
+    <!-- the popup massage  -->
+    <div class="alert alert-{{colour}}" style="text-align: center;" id="massage_top">
         {{msg}}
     </div>
 
@@ -202,7 +206,7 @@
     <!-- Start Cart  -->
     <div class="cart-box-main">
         <div class="container">
-            
+
             <div class="row">
                 <div class="col-sm-6 col-lg-6 mb-3">
                     <div class="checkout-address">
@@ -220,8 +224,8 @@
                             <hr>
                             <img id="imgcheck" src="{{ obj.img.url }}"><br>
                             <b> {{obj.name}} <br>
-                            <label>qty: {{qty}}</label><br>
-                            <label>₹{{obj.net_price}}</label></b>
+                                <label>qty: {{qty}}</label><br>
+                                <label>₹{{obj.net_price}}</label></b>
                         </div>
                         <div class="check-box" style="line-height: 95%;padding:10px; padding:20px;">
                             <b> Billig Address </b>
@@ -233,13 +237,14 @@
                             <label>{{obja.contry}}</label><br>
                             <label>ph: {{obja.phone_no1}} </label><br>
                         </div>
-                            <hr class="mb-1"> </form>
+                        <hr class="mb-1">
+                        </form>
                     </div>
                 </div>
                 <div class="col-sm-6 col-lg-6 mb-3">
                     <div class="row">
-                        
-                        
+
+
                         <div class="col-md-12 col-lg-12">
                             <div class="order-box">
                                 <div class="title-left">
@@ -258,7 +263,7 @@
                                     <h4>Tax</h4>
                                     <div class="ml-auto font-weight-bold"> ₹ {{tax}} </div>
                                 </div>
-                                
+
                                 <div class="d-flex">
                                     <h4> Paking charge </h4>
                                     <div class="ml-auto font-weight-bold"> ₹ {{pakking}}</div>
@@ -272,7 +277,7 @@
                                     <h4>Discount</h4>
                                     <div class="ml-auto font-weight-bold"> ₹ {{discount}} </div>
                                 </div>
-                                
+
                                 <div class="d-flex">
                                     <h4>Shipping Cost</h4>
                                     <div class="ml-auto font-weight-bold"> Free </div>
@@ -282,9 +287,11 @@
                                     <h5>Grand Total</h5>
                                     <div class="ml-auto h5"> ₹ {{granttotal}}</div>
                                 </div>
-                                <hr> </div>
+                                <hr>
+                            </div>
                         </div>
-                        <div class="col-12 d-flex shopping-box"> <a href="#" class="ml-auto btn hvr-hover">Place Order</a> </div>
+                        <div class="col-12 d-flex shopping-box"> <a href="#" class="ml-auto btn hvr-hover">Place
+                                Order</a> </div>
                     </div>
                 </div>
             </div>
@@ -385,32 +392,28 @@
     <footer>
         <div class="footer-main">
             <div class="container">
-				<div class="row">
-					<div class="col-lg-4 col-md-12 col-sm-12">
-						<div class="footer-top-box">
-							<h3>Business Time</h3>
-							<ul class="list-time">
-								<li>Monday - Friday: 08.00am to 05.00pm</li> <li>Saturday: 10.00am to 08.00pm</li> <li>Sunday: <span>Closed</span></li>
-							</ul>
-						</div>
-					</div>
-					<div class="col-lg-4 col-md-12 col-sm-12">
-						<div class="footer-top-box">
-							<h3>Newsletter</h3>
-							<form class="newsletter-box">
-								<div class="form-group">
-									<input class="" type="email" name="Email" placeholder="Email Address*" />
-									<i class="fa fa-envelope"></i>
-								</div>
-								<button class="btn hvr-hover" type="submit">Submit</button>
-							</form>
-						</div>
-					</div>
-					<div class="col-lg-4 col-md-12 col-sm-12">
-						<div class="footer-top-box">
-							<h3>Social Media</h3>
-							<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-							<ul>
+                <div class="row">
+                    <div class="col-lg-4 col-md-12 col-sm-12">
+                        <div class="footer-top-box">
+                       
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-12 col-sm-12">
+                        <div class="footer-top-box">
+                            <h3>Newsletter</h3>
+                            <form class="newsletter-box">
+                                <div class="form-group">
+                                    <input class="" type="email" name="Email" placeholder="Email Address*" />
+                                    <i class="fa fa-envelope"></i>
+                                </div>
+                                <button class="btn hvr-hover" type="submit">Submit</button>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-12 col-sm-12">
+                        <div class="footer-top-box">
+                            
+                            <ul>
                                 <li><a href="#"><i class="fab fa-facebook" aria-hidden="true"></i></a></li>
                                 <li><a href="#"><i class="fab fa-twitter" aria-hidden="true"></i></a></li>
                                 <li><a href="#"><i class="fab fa-linkedin" aria-hidden="true"></i></a></li>
@@ -419,48 +422,11 @@
                                 <li><a href="#"><i class="fab fa-pinterest-p" aria-hidden="true"></i></a></li>
                                 <li><a href="#"><i class="fab fa-whatsapp" aria-hidden="true"></i></a></li>
                             </ul>
-						</div>
-					</div>
-				</div>
-				<hr>
-                <div class="row">
-                    <div class="col-lg-4 col-md-12 col-sm-12">
-                        <div class="footer-widget">
-                            <h4>About Freshshop</h4>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p> 
-							<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p> 							
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-md-12 col-sm-12">
-                        <div class="footer-link">
-                            <h4>Information</h4>
-                            <ul>
-                                <li><a href="#">About Us</a></li>
-                                <li><a href="#">Customer Service</a></li>
-                                <li><a href="#">Our Sitemap</a></li>
-                                <li><a href="#">Terms &amp; Conditions</a></li>
-                                <li><a href="#">Privacy Policy</a></li>
-                                <li><a href="#">Delivery Information</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-md-12 col-sm-12">
-                        <div class="footer-link-contact">
-                            <h4>Contact Us</h4>
-                            <ul>
-                                <li>
-                                    <p><i class="fas fa-map-marker-alt"></i>Address: Michael I. Days 3756 <br>Preston Street Wichita,<br> KS 67213 </p>
-                                </li>
-                                <li>
-                                    <p><i class="fas fa-phone-square"></i>Phone: <a href="tel:+1-888705770">+1-888 705 770</a></p>
-                                </li>
-                                <li>
-                                    <p><i class="fas fa-envelope"></i>Email: <a href="mailto:contactinfo@gmail.com">contactinfo@gmail.com</a></p>
-                                </li>
-                            </ul>
                         </div>
                     </div>
                 </div>
+                <hr>
+                
             </div>
         </div>
     </footer>
@@ -469,7 +435,8 @@
     <!-- Start copyright  -->
     <div class="footer-copyright">
         <p class="footer-company">All Rights Reserved. &copy; 2018 <a href="#">ThewayShop</a> Design By :
-            <a href="https://html.design/">html design</a></p>
+            <a href="https://html.design/">html design</a>
+        </p>
     </div>
     <!-- End copyright  -->
 
@@ -480,11 +447,11 @@
     <script src="{% static 'js/popper.min.js' %}"></script>
     <script src="{% static 'js/bootstrap.min.js' %}"></script>
     <script>
-        setTimeout(function(){
-            if ($('#massage_top').length >0) {
+        setTimeout(function () {
+            if ($('#massage_top').length > 0) {
                 $('#massage_top').remove();
             }
-        },3000)
+        }, 3000)
     </script>
     <!-- ALL PLUGINS -->
     <script src="{% static 'js/jquery.superslides.min.js' %}"></script>
@@ -500,58 +467,59 @@
     <script src="{% static 'js/custom.js' %}"></script>
     <script>
         var stateObject = {
-        "India": { "Delhi": ["new Delhi", "North Delhi"],
-        "Kerala": ["Alappuzha",
-        "Ernakulam",
-        "Idukki",
-        "Kannur",
-        "Kasaragod",
-        "Kollam",
-        "Kottayam",
-        "Kozhikode",
-        "Malappuram",
-        "Palakkad",
-        "Pathanamthitta",
-        "Thiruvananthapuram",
-        "Thrissur",
-        "Wayanad",
-        ],
-        "Goa": ["North Goa", "South Goa"],
-        },
-        "Australia": {
-        "South Australia": ["Dunstan", "Mitchell"],
-        "Victoria": ["Altona", "Euroa"]
-        }, "Canada": {
-        "Alberta": ["Acadia", "Bighorn"],
-        "Columbia": ["Washington", ""]
-        },
+            "India": {
+                "Delhi": ["new Delhi", "North Delhi"],
+                "Kerala": ["Alappuzha",
+                    "Ernakulam",
+                    "Idukki",
+                    "Kannur",
+                    "Kasaragod",
+                    "Kollam",
+                    "Kottayam",
+                    "Kozhikode",
+                    "Malappuram",
+                    "Palakkad",
+                    "Pathanamthitta",
+                    "Thiruvananthapuram",
+                    "Thrissur",
+                    "Wayanad",
+                ],
+                "Goa": ["North Goa", "South Goa"],
+            },
+            "Australia": {
+                "South Australia": ["Dunstan", "Mitchell"],
+                "Victoria": ["Altona", "Euroa"]
+            }, "Canada": {
+                "Alberta": ["Acadia", "Bighorn"],
+                "Columbia": ["Washington", ""]
+            },
         }
         window.onload = function () {
-        var countySel = document.getElementById("countySel"),
-        stateSel = document.getElementById("stateSel"),
-        districtSel = document.getElementById("districtSel");
-        for (var country in stateObject) {
-        countySel.options[countySel.options.length] = new Option(country, country);
+            var countySel = document.getElementById("countySel"),
+                stateSel = document.getElementById("stateSel"),
+                districtSel = document.getElementById("districtSel");
+            for (var country in stateObject) {
+                countySel.options[countySel.options.length] = new Option(country, country);
+            }
+            countySel.onchange = function () {
+                stateSel.length = 1; // remove all options bar first
+                districtSel.length = 1; // remove all options bar first
+                if (this.selectedIndex < 1) return; // done
+                for (var state in stateObject[this.value]) {
+                    stateSel.options[stateSel.options.length] = new Option(state, state);
+                }
+            }
+            countySel.onchange(); // reset in case page is reloaded
+            stateSel.onchange = function () {
+                districtSel.length = 1; // remove all options bar first
+                if (this.selectedIndex < 1) return; // done
+                var district = stateObject[countySel.value][this.value];
+                for (var i = 0; i < district.length; i++) {
+                    districtSel.options[districtSel.options.length] = new Option(district[i], district[i]);
+                }
+            }
         }
-        countySel.onchange = function () {
-        stateSel.length = 1; // remove all options bar first
-        districtSel.length = 1; // remove all options bar first
-        if (this.selectedIndex < 1) return; // done
-        for (var state in stateObject[this.value]) {
-        stateSel.options[stateSel.options.length] = new Option(state, state);
-        }
-        }
-        countySel.onchange(); // reset in case page is reloaded
-        stateSel.onchange = function () {
-        districtSel.length = 1; // remove all options bar first
-        if (this.selectedIndex < 1) return; // done
-        var district = stateObject[countySel.value][this.value];
-        for (var i = 0; i < district.length; i++) {
-        districtSel.options[districtSel.options.length] = new Option(district[i], district[i]);
-        }
-        }
-        }
-    </script> 
+    </script>
 </body>
 
 </html>

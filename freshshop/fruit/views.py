@@ -83,7 +83,7 @@ def frview(request):
             print ('pleses enter the value ...')
         else:
             
-            print ('poda patty')
+        
             costamor_nam = request.POST['cos_name']
             obj = fruits.objects.get(id = pro_id)
             product_id = obj
@@ -101,7 +101,6 @@ def frview(request):
         
 
 def autocom(request):
-    
     if 'term' in request.GET:
         nam = request.GET['term']
         print(nam)
